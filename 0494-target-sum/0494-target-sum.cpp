@@ -15,8 +15,8 @@ public:
 
     int findTargetSumWays(vector<int>& nums, int target) {
         int n = nums.size();
-        int offset = 10000;
-        vector<vector<int>> dp(n, vector<int>(20001, -1));
+        int offset = 2000;
+        vector<vector<int>> dp(n, vector<int>(4001, -1));
         return f(n-1, target, nums, dp, offset);
     }
 };
