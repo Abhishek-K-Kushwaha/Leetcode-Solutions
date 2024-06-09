@@ -1,43 +1,22 @@
 class Solution {
 public:
-    int findTargetSumWays(vector<int>& nums, int target) {
-        int sum = 0, zero = 0;
-        for(int i=0; i<nums.size(); i++){
-            sum += nums[i];
-            zero += (nums[i] == 0) ? 1 : 0;
+    int f(int ind, int tar, vector<int>& nums, vector<vector<int>>& dp, int offset){
+        if (dp[ind][tar + offset] != -1) return dp[ind][tar + offset];
+        if (ind == 0){
+            int cnt = 0;
+            if (nums[ind] == tar) cnt++;
+            if (nums[ind] == -tar) cnt++;
+            return dp[ind][tar + offset] = cnt;
         }
-
-        if((target + sum) % 2 != 0 || target + sum < 0){
-            return 0;
-        }
-
-        if(sum + target == 0){
-            return pow(2, zero);
-        }
-
-        sort(nums.begin(), nums.end());
-        vector<vector<int>> dp(nums.size(), vector<int> (target+sum+1, -1));
-        return findTargetSumWaysUtil(nums, 0, (target+sum)/2, dp);
+        int pos = f(ind-1, tar - nums[ind], nums, dp, offset);
+        int neg = f(ind-1, tar + nums[ind], nums, dp, offset);
+        return dp[ind][tar + offset] = pos + neg;
     }
 
-    int findTargetSumWaysUtil(vector<int> &nums, int i, int target, vector<vector<int>> &dp){
-
-        if(i == nums.size()){
-            return (target == 0 ? 1 : 0);
-        }
-
-        if(target == 0){
-            return 1;
-        }
-
-        if(dp[i][target] != -1){
-            return dp[i][target];
-        }
-
-        if(nums[i] > target){
-            return findTargetSumWaysUtil(nums, i+1, target, dp);
-        }
-
-        return dp[i][target] = findTargetSumWaysUtil(nums, i+1, target-nums[i], dp) +   findTargetSumWaysUtil(nums, i+1, target, dp);
+    int findTargetSumWays(vector<int>& nums, int target) {
+        int n = nums.size();
+        int offset = 10000;
+        vector<vector<int>> dp(n, vector<int>(20001, -1));
+        return f(n-1, target, nums, dp, offset);
     }
 };
