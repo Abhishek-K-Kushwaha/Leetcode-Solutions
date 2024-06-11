@@ -4,6 +4,8 @@ public:
         if (grid[0][0] == 1)
             return -1;
         int n = grid.size();
+        if (grid[n-1][n-1] == 1)
+            return -1;
         vector<vector<int>> dist(n, vector<int>(n, INT_MAX));
         queue<pair<int, int>> q;
         q.push({0, 0});
