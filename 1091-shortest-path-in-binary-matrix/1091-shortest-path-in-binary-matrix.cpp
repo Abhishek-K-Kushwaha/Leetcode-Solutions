@@ -10,13 +10,13 @@ public:
         queue<pair<int, int>> q;
         q.push({0, 0});
         dist[0][0] = 1;
+        vector<int> delx = {0, 0, 1, -1, 1, 1, -1, -1};
+        vector<int> dely = {-1, 1, 0, 0, -1, 1, 1, -1};
         while (!q.empty()) {
             int x = q.front().first;
             int y = q.front().second;
             q.pop();
             int d = dist[x][y];
-            vector<int> delx = {0, 0, 1, -1, 1, 1, -1, -1};
-            vector<int> dely = {-1, 1, 0, 0, -1, 1, 1, -1};
             for (int i = 0; i < 8; i++) {
                 int newx = x + delx[i];
                 int newy = y + dely[i];
