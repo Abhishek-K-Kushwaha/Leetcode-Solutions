@@ -1,50 +1,53 @@
 class Solution {
 public:
-    int dijkstra(int src, vector<vector<pair<int, int>>>& adj, int threshold, int n) {
-        set<pair<int, int>> st;
-        vector<int> dist(n, INT_MAX);
-        dist[src] = 0;
-        st.insert({0, src});
-        while (!st.empty()) {
-            auto it = *(st.begin());
-            st.erase(it);
-            int d = it.first;
-            int node = it.second;
-            for (auto nxt : adj[node]) {
-                int nxtnode = nxt.first;
-                int nxtd = nxt.second;
-                if (nxtd+d > threshold) continue;
-                if (nxtd + d < dist[nxtnode]) {
-                    dist[nxtnode] = nxtd + d;
-                    st.insert({nxtd + d, nxtnode});
+    int findTheCity(int n, vector<vector<int>>& edges, int distanceThreshold) {
+        //Initialising distance array
+        vector<vector<int>> dist(n, vector<int>(n, 1e9));
+        for(int i = 0; i < n; i++)
+        {
+            dist[i][i] = 0;
+        }
+        //Marking its weight from one city to its neighbour city
+        for(auto it : edges)
+        {
+            int from = it[0];
+            int to = it[1];
+            int weight = it[2];
+            dist[from][to] = weight;
+            dist[to][from] = weight;
+        }
+        //Implementing Floyd Warshall Algorithm
+        for(int thr = 0; thr < n; thr++)
+        {
+            for(int i = 0; i < n; i++)
+            {
+                for(int j = 0; j < n; j++)
+                {
+                    if(dist[i][j] > dist[i][thr] + dist[thr][j])
+                    {
+                        dist[i][j] = dist[i][thr] + dist[thr][j];
+                    }
                 }
             }
         }
-        int cnt = 0;
-        for (int d : dist) {
-            if (d <= threshold)
-                cnt++;
-        }
-        return cnt;
-    }
-    int findTheCity(int n, vector<vector<int>>& edges, int threshold) {
-        vector<vector<pair<int, int>>> adj(n);
-        for (auto eg : edges) {
-            int u = eg[0];
-            int v = eg[1];
-            int w = eg[2];
-            adj[u].push_back({v, w});
-            adj[v].push_back({u, w});
-        }
-        int mincount = INT_MAX;
-        int ans = -1;
-        for (int i = 0; i < n; i++) {
-            int cnt = dijkstra(i, adj, threshold, n);
-            if (cnt <= mincount) {
-                ans = i;
-                mincount = cnt;
+        int mincnt = n, city = -1;
+        //Finding the no of cities can be reached from each city in the threshold distance
+        for(int i = 0; i < n; i++)
+        {
+            int cnt = 0;
+            for(int j = 0; j < n; j++)
+            {
+                if(dist[i][j] <= distanceThreshold)
+                {
+                    cnt++;
+                }
+            }
+            if(mincnt >= cnt)
+            {
+                mincnt = cnt;
+                city = i;
             }
         }
-        return ans;
+        return city;
     }
 };
