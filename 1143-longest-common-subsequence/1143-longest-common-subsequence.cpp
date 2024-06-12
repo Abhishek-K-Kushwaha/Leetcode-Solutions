@@ -26,7 +26,6 @@ public:
                     dp[ind1][ind2] =
                         0 + max(dp[ind1 - 1][ind2], dp[ind1][ind2 - 1]);
                 }
-                // cout<< ind1<< " "<< ind2<< " val "<<dp[ind1][ind2]<<" ";
             }
         }
         return dp[len1 - 1][len2 - 1];
