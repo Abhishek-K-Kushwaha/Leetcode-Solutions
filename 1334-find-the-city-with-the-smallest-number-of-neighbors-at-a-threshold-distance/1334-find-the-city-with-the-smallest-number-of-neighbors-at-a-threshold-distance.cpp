@@ -13,6 +13,7 @@ public:
             for (auto nxt : adj[node]) {
                 int nxtnode = nxt.first;
                 int nxtd = nxt.second;
+                if (nxtd+d > threshold) continue;
                 if (nxtd + d < dist[nxtnode]) {
                     dist[nxtnode] = nxtd + d;
                     st.insert({nxtd + d, nxtnode});
