@@ -10,21 +10,21 @@ public:
             adj[u].push_back({v, w});
             adj[v].push_back({u, w});
         }
-        vector<int> dist(n, INT_MAX);
+        vector<long long> dist(n, 1e18);
         vector<int> ways(n, 0);
         dist[0] = 0;
         ways[0] = 1;
-        set<pair<int, int>> st; //{distance,node}
+        set<pair<long long, int>> st; //{distance,node}
         st.insert({0, 0});
         while (!st.empty()) {
             auto it = *(st.begin());
             st.erase(it);
-            int d = it.first;
+            long long d = it.first;
             int node = it.second;
             int w = ways[node];
             for (auto nxt : adj[node]) {
                 int nxtnode = nxt.first;
-                int nxtd = nxt.second;
+                long long nxtd = nxt.second;
                 if (nxtd + d == dist[nxtnode]) {
                     ways[nxtnode] += w;
                     ways[nxtnode] %= mod;
