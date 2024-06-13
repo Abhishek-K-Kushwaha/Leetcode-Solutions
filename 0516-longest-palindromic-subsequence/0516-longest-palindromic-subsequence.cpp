@@ -13,8 +13,8 @@ public:
     }
 
     int longestPalindromeSubseq(string s) {
-        string orgs = s;
-        reverse(s.begin(), s.end());
-        return lcs(s, orgs);
+        string revs = s;
+        reverse(revs.begin(), revs.end());
+        return lcs(s, revs);
     }
 };
