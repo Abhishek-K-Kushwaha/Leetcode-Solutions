@@ -18,7 +18,7 @@ public:
                     int dlt = dp[i - 1][j];
                     int insrt = dp[i][j - 1];
                     int rplc = dp[i - 1][j - 1];
-                    dp[i][j] = 1 + min({dlt, insrt, rplc});
+                    dp[i][j] = 1 + min(rplc, min(dlt, insrt));
                 }
             }
         }
