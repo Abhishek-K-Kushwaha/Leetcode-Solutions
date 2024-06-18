@@ -9,11 +9,8 @@ public:
                     int pick = 1 + row[ind + 1];
                     int notpick = row[prev + 1];
                     row[prev + 1] = max(pick, notpick);
-                } // else {
-                //     row[prev + 1] = row[prev + 1];
-                // }
+                } 
             }
-            // row = curr;
         }
         return row[0];
     }
