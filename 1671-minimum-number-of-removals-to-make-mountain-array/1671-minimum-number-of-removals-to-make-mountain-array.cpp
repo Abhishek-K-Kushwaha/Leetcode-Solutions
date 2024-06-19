@@ -20,8 +20,8 @@ public:
         }
         int ans = 0;
         for (int i = 0; i < n; i++) {
-            if (ans < dp[i] + revdp[i] - 1 && dp[i] != 1 && revdp[i] != 1) {
-                ans = dp[i] + revdp[i] - 1;
+            if (dp[i] != 1 && revdp[i] != 1) {
+                ans = max(ans, dp[i] + revdp[i] - 1);
             }
         }
         return n - ans;
