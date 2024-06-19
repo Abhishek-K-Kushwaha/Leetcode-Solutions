@@ -3,7 +3,7 @@ public:
     int f(int i, int j, vector<int>& cuts, vector<vector<int>>& dp) {
         if (i > j) return 0;
         if (dp[i][j] != -1) return dp[i][j];
-        int ans = 1e8;
+        int ans = INT_MAX;
         for (int k = i; k <= j; k++){
             int cost = cuts[j+1] - cuts[i-1];
             cost += f(i, k-1, cuts, dp);
