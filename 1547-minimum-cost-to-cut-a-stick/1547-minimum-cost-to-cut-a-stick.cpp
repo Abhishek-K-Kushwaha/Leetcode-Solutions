@@ -11,8 +11,8 @@ public:
                 int ans = INT_MAX;
                 for (int k = i; k <= j; k++) {
                     int cost = cuts[j + 1] - cuts[i - 1];
-                    cost += dp[i][k-1];// f(i, k - 1, cuts, dp);
-                    cost += dp[k+1][j];// f(k + 1, j, cuts, dp);
+                    cost += dp[i][k-1];
+                    cost += dp[k+1][j];
                     ans = min(ans, cost);
                 }
                 dp[i][j] = ans;
