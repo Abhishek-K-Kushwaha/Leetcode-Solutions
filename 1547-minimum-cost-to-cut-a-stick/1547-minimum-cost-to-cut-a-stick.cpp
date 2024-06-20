@@ -1,24 +1,23 @@
 class Solution {
 public:
-    int f(int i, int j, vector<int>& cuts, unordered_map<long long,int>& dp, int n) {
-        if (j - i <= 1) return 0;
-        long long key = (long long)i*n + j;
-        if (dp.find(key) != dp.end()) return dp[key];
-        int ans = 1e9;
-        int flag = 0;
-        for (int k : cuts) {
-            if (k > i && k < j) {
-                flag = 1;
-                int cost = (j - i) + f(i, k, cuts, dp, n) + f(k, j, cuts, dp, n);
-                ans = min(ans, cost);
+    int minCost(int n, vector<int>& cuts) {
+        sort(cuts.begin(), cuts.end());
+        cuts.insert(cuts.begin(), 0);
+        cuts.push_back(n);
+        int c = cuts.size();
+        vector<vector<int>> dp(c, vector<int>(c, 0));
+        for (int i = c - 2; i >= 1; i--){
+            for (int j = i; j <= c -2; j++){
+                int ans = INT_MAX;
+                for (int k = i; k <= j; k++) {
+                    int cost = cuts[j + 1] - cuts[i - 1];
+                    cost += dp[i][k-1];// f(i, k - 1, cuts, dp);
+                    cost += dp[k+1][j];// f(k + 1, j, cuts, dp);
+                    ans = min(ans, cost);
+                }
+                dp[i][j] = ans;
             }
         }
-        if (!flag) return dp[key] = 0;
-        else return dp[key] = ans;
-    }
-
-    int minCost(int n, vector<int>& cuts) {
-        unordered_map<long long,int> dp;
-        return f(0, n, cuts, dp, n);
+        return dp[1][c-2];
     }
 };
