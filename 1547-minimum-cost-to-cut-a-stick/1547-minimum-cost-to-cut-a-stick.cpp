@@ -18,7 +18,6 @@ public:
     }
 
     int minCost(int n, vector<int>& cuts) {
-        //vector<vector<int>> dp(n+1, vector<int> (n+1,-1));
         unordered_map<long long,int> dp;
         return f(0, n, cuts, dp, n);
     }
