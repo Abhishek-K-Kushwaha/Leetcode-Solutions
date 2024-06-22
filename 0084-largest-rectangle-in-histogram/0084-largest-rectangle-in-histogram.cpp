@@ -6,7 +6,7 @@ public:
         int ans = 0;
         for (int i = 0; i <= n; i++) {
             while (!stk.empty() &&
-                   (i == n || heights[stk.top()] > heights[i])) {
+                   (i == n || heights[stk.top()] >= heights[i])) {
                 int h = heights[stk.top()];
                 stk.pop();
                 int w;
