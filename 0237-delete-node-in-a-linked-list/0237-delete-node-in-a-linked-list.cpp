@@ -11,7 +11,7 @@ public:
     void deleteNode(ListNode* node) {
         int data = node->next->val;
         ListNode *nxt = node->next->next;
-        delete node->next;
+        //delete node->next;
         node->val = data;
         node->next = nxt;
     }
