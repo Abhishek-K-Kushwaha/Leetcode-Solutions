@@ -18,10 +18,10 @@ public:
         int cnt = 1;
         while(temp){
             ListNode* nxt = temp->next;
-            ListNode* nxtnxt = nullptr;
-            if (nxt) nxtnxt = temp->next->next;
-            if (cnt%2 && (nxt == nullptr || nxtnxt == nullptr)) oddtail = temp;
-            temp->next = nxtnxt;
+            //ListNode* nxtnxt = nullptr;
+            //if (nxt) nxtnxt = temp->next->next;
+            if (cnt%2 && (nxt == nullptr || nxt->next == nullptr)) oddtail = temp;
+            if (nxt) temp->next = temp->next->next;
             temp = nxt;
             cnt++;
         }
