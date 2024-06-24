@@ -12,20 +12,18 @@ class Solution {
 public:
     ListNode* oddEvenList(ListNode* head) {
         if (head == nullptr || head->next == nullptr) return head;
-        ListNode* temp = head;
+        ListNode* odd = head;
         ListNode* evenhead = head->next;
-        ListNode* oddtail;
-        int cnt = 1;
-        while(temp){
-            ListNode* nxt = temp->next;
-            ListNode* nxtnxt = nullptr;
-            if (nxt) nxtnxt = temp->next->next;
-            if (cnt%2 && (nxt == nullptr || nxtnxt == nullptr)) oddtail = temp;
-            temp->next = nxtnxt;
-            temp = nxt;
-            cnt++;
+        ListNode* even = head->next;
+        while(even && even->next){
+            odd->next = odd->next->next;
+            odd = odd->next;
+            //if (odd->next == nullptr) break;
+            even->next = even->next->next;
+            even = even->next;
+            //if (even->next == nullptr) break;
         }
-        oddtail->next = evenhead;
+        odd->next = evenhead;
         return head;
     }
 };
