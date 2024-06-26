@@ -17,7 +17,6 @@ public:
         ListNode* temp = head->next;
         ListNode* last = headofhead;
         ListNode* node = head;
-        // int num = head->data;
         int cnt = 1;
         while (temp) {
             if (temp->val == node->val) {
