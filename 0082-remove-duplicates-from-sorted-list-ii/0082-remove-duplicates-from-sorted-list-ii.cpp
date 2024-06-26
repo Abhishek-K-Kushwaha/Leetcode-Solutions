@@ -34,8 +34,9 @@ public:
         }
         if (cnt == 1) {
             last->next = node;
+            last = last->next;
         }
-        // last->next = nullptr;
+        last->next = nullptr;
         return headofhead->next;
     }
 };
