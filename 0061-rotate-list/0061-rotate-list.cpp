@@ -26,7 +26,6 @@ public:
         while (cnt != len - k - 1){
             cnt++;
             newtail = newtail->next;
-            //cnt++;
         }
         ListNode* newhead = newtail->next;
         newtail->next = nullptr;
