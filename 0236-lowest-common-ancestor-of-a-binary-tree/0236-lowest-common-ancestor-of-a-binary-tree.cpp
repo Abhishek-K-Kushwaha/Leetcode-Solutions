@@ -9,7 +9,7 @@
  */
 class Solution {
 public:
-    TreeNode* f(TreeNode* node, TreeNode*& p, TreeNode*& q){
+    TreeNode* f(TreeNode* node, TreeNode* p, TreeNode* q){
         if (node == nullptr || node == p || node == q) return node;
         TreeNode* l = f(node->left, p, q);
         TreeNode* r = f(node->right, p, q);
