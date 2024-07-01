@@ -12,7 +12,6 @@ public:
     vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
         unordered_map<TreeNode*, TreeNode*> parent;
         queue<TreeNode*> q;
-        //parent[root] = nullptr;
         q.push(root);
         while (!q.empty()) {
             TreeNode* node = q.front();
