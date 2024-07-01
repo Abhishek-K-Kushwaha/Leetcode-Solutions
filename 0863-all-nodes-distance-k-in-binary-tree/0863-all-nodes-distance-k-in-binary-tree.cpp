@@ -10,32 +10,34 @@
 class Solution {
 public:
     vector<int> distanceK(TreeNode* root, TreeNode* target, int k) {
-        unordered_map<TreeNode*,TreeNode*> parent;
+        unordered_map<TreeNode*, TreeNode*> parent;
         queue<TreeNode*> q;
         parent[root] = nullptr;
         q.push(root);
-        while (!q.empty()){
+        while (!q.empty()) {
             TreeNode* node = q.front();
             q.pop();
-            if (node == target) break;
-            if (node->left){
+            if (node == target)
+                break;
+            if (node->left) {
                 q.push(node->left);
                 parent[node->left] = node;
             }
-            if (node->right){
+            if (node->right) {
                 q.push(node->right);
                 parent[node->right] = node;
             }
         }
-        unordered_map<TreeNode*,int> visited;
+        unordered_map<TreeNode*, int> visited;
         visited[target] = 1;
         q = {};
         q.push(target);
         int dist = 0;
-        while (!q.empty()){
-            if (dist == k) break;
+        while (!q.empty()) {
+            if (dist == k)
+                break;
             int len = q.size();
-            for (int i = 0; i < len; i++){
+            for (int i = 0; i < len; i++) {
                 TreeNode* node = q.front();
                 q.pop();
                 if (node->left && !visited[node->left]) {
@@ -46,7 +48,7 @@ public:
                     q.push(node->right);
                     visited[node->right] = 1;
                 }
-                if (parent[node] && !visited[parent[node]]){
+                if (parent[node] && !visited[parent[node]]) {
                     q.push(parent[node]);
                     visited[parent[node]] = 1;
                 }
@@ -54,7 +56,7 @@ public:
             dist++;
         }
         vector<int> ans;
-        while (!q.empty()){
+        while (!q.empty()) {
             ans.push_back(q.front()->val);
             q.pop();
         }
