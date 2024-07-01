@@ -21,6 +21,7 @@ public:
         while (!q.empty()) {
             int len = q.size();
             lastmaxind = maxind;
+            maxind = INT_MIN;
             int minind = INT_MAX;
             for (int i = 0; i < len; i++) {
                 TreeNode* node = q.front().first;
