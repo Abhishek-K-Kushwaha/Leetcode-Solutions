@@ -17,6 +17,7 @@ public:
         while (!q.empty()){
             TreeNode* node = q.front();
             q.pop();
+            if (node == target) break;
             if (node->left){
                 q.push(node->left);
                 parent[node->left] = node;
@@ -28,6 +29,7 @@ public:
         }
         unordered_map<TreeNode*,int> visited;
         visited[target] = 1;
+        q = {};
         q.push(target);
         int dist = 0;
         while (!q.empty()){
