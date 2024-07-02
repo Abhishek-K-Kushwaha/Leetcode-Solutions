@@ -17,18 +17,21 @@ public:
             return;
         stack<TreeNode*> stk;
         stk.push(root);
-        TreeNode* prev = new TreeNode(-1);
-        while (!stk.empty()) {
+        while (true) {
             TreeNode* node = stk.top();
             stk.pop();
-            prev->right = node;
-            prev->left = nullptr;
             if (node->right)
                 stk.push(node->right);
             if (node->left)
                 stk.push(node->left);
-            prev = node;
+            node->left = nullptr;
+            if (!stk.empty()) {
+                node->right = stk.top();
+            }
+            else{ 
+                node->right = nullptr;
+                break;
+            }
         }
-        prev->right = nullptr;
     }
 };
