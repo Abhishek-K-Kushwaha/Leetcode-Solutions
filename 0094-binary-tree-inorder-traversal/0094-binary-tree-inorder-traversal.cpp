@@ -11,28 +11,28 @@
  */
 class Solution {
 public:
-    // void f(TreeNode* node, vector<int>& ans){
-    //     if (node == nullptr) return;
-    //     f(node->left, ans);
-    //     ans.push_back(node->val);
-    //     f(node->right, ans);
-    // }
-
     vector<int> inorderTraversal(TreeNode* root) {
         vector<int> ans;
-        stack<TreeNode*> stk;
         TreeNode* node = root;
-        while (true){
-            if (node == nullptr){
-                if (stk.empty()) break;
-                node = stk.top();
-                stk.pop();
+        while(node){
+            if (node->left == nullptr) {
                 ans.push_back(node->val);
                 node = node->right;
             }
             else{
-                stk.push(node);
-                node = node->left;
+                TreeNode* prev = node->left;
+                while (prev->right && prev->right != node){
+                    prev = prev->right;
+                }
+                if (prev->right == nullptr){
+                    prev->right = node;
+                    node = node->left;
+                }
+                else{   //i.e. prev->right == node;
+                    prev->right = nullptr;
+                    ans.push_back(node->val);
+                    node = node->right;
+                }
             }
         }
         return ans;
