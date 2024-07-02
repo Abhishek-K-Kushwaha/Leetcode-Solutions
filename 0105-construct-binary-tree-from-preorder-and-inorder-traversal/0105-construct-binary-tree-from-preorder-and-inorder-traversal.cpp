@@ -16,10 +16,10 @@ public:
         if (prest > preend || inst > inend) return nullptr;
         TreeNode* node = new TreeNode(pre[prest]);
         int i = ind[pre[prest]];
-
-        node->left = add(pre, prest+1, prest + i - inst, 
+        int numsonleft = i - inst;
+        node->left = add(pre, prest+1, prest + numsonleft, 
                         in, inst, i-1, ind);
-        node->right = add(pre, prest+i-inst+1, preend,
+        node->right = add(pre, prest+numsonleft+1, preend,
                         in, i+1, inend, ind);
         return node;
     }
