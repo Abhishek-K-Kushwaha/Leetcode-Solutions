@@ -25,7 +25,6 @@ public:
             } else
                 ans.append("n,");
         }
-        cout << ans << " ";
         return ans;
     }
 
