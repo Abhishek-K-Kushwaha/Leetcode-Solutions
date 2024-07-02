@@ -1,7 +1,8 @@
 class Solution {
 public:
     vector<int> intersect(vector<int>& nums1, vector<int>& nums2) {
-        unordered_map<int, int> dict;
+        //unordered_map<int, int> dict;
+        vector<int> dict(1001);
         for (int i : nums1) {
             dict[i]++;
         }
