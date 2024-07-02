@@ -30,8 +30,7 @@ public:
         for (int i = 0; i < n; i++){
             ind[inorder[i]] = i;
         }
-        TreeNode* root = add(preorder, 0, n-1, 
-                            inorder, 0, n-1, ind);
+        TreeNode* root = add(preorder, 0, n-1, inorder, 0, n-1, ind);
         return root;
     }
 };
