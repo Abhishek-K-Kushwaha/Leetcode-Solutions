@@ -16,23 +16,19 @@ public:
         if (root == nullptr)
             return;
         stack<TreeNode*> stk;
-        vector<TreeNode*> preorder;
         stk.push(root);
-        int cnt = 1;
+        TreeNode* prev = new TreeNode(-1);
         while (!stk.empty()) {
             TreeNode* node = stk.top();
             stk.pop();
-            preorder.push_back(node);
-            cnt++;
+            prev->right = node;
+            prev->left = nullptr;
             if (node->right)
                 stk.push(node->right);
             if (node->left)
                 stk.push(node->left);
+            prev = node;
         }
-        preorder.push_back(nullptr);
-        for (int i = 0; i < cnt - 1; i++) {
-            preorder[i]->left = nullptr;
-            preorder[i]->right = preorder[i + 1];
-        }
+        prev->right = nullptr;
     }
 };
