@@ -11,23 +11,22 @@
  */
 class Solution {
 public:
-    int f(TreeNode* root, int& cnt, int k){
-        if (root == nullptr) return 0;
-
-        int m = f(root->left, cnt, k);
-        if (m) return m;
-
+    void f(TreeNode* root, int& cnt, int k, int& ans){
+        if (root == nullptr) return;
+        f(root->left, cnt, k, ans);
         cnt++;
-        if (cnt == k) return root->val;
-
-        m = f(root->right, cnt, k);
-        if (m) return m;
-
-        return 0;
+        if (cnt == k){ 
+            ans = root->val;
+            return;
+        }
+        f(root->right, cnt, k, ans);
+        return;
     }
 
     int kthSmallest(TreeNode* root, int k) {
         int cnt = 0;
-        return f(root, cnt, k);
+        int ans;
+        f(root, cnt, k, ans);
+        return ans;
     }
 };
