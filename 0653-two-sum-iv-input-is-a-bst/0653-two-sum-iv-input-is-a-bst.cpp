@@ -11,9 +11,9 @@
  */
 class Solution {
 public:
-    bool findSecond(TreeNode* root, int target){
+    bool findSecond(TreeNode* root, int target, TreeNode* first){
         while(root){
-            if (root->val == target) return true;
+            if (root->val == target && root != first) return true;
             else if (root->val > target) root = root->left;
             else root = root->right;
         }
@@ -25,7 +25,7 @@ public:
         while(!stk.empty()){
             TreeNode* first = stk.top();
             stk.pop();
-            if (findSecond(root, k - first->val)) return true;
+            if (findSecond(root, k - first->val, first)) return true;
             if (first->left) stk.push(first->left);
             if (first->right) stk.push(first->right);
         }
