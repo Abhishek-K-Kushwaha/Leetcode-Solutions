@@ -11,13 +11,13 @@
  */
 class Solution {
 public:
-    bool f(TreeNode* node, int min, int max){
-        //if (node == nullptr) return true;
+    bool f(TreeNode* node, long long min, long long max){
+        if (node == nullptr) return true;
         if (node->val > max || node->val < min) return false;
-        bool ans = true;
-        if (node->left) ans = f(node->left, min, node->val-1);
+        //bool ans = true;
+        bool ans = f(node->left, min, (long long) node->val-1);
         if (!ans) return false;
-        if (node->right) ans = ans & f(node->right, node->val+1, max);
+        ans = ans & f(node->right,(long long) node->val+1, max);
         return ans;
     }
     bool isValidBST(TreeNode* root) {
