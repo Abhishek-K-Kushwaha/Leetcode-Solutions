@@ -45,7 +45,6 @@ public:
         BSTIterator after(root, false);
         int i = after.next(); // smallest element
         int j = before.next(); // largest element
-        cout<< i << " " << j << " | ";
         while (i < j){
             if (i + j == k) return true;
             else if (i + j > k) j = before.next();
