@@ -25,9 +25,7 @@ public:
     int next() {
         TreeNode* node = stk.top();
         stk.pop();
-        //if (node->right){
-            pushAllLeft(node->right);
-        //}
+        pushAllLeft(node->right);
         return node->val;
     }
     
