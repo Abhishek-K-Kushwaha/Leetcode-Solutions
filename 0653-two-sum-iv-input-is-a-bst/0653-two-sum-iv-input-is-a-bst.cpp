@@ -12,7 +12,7 @@
 class BSTIterator {
 public:
     stack<TreeNode*> stk;
-    bool reverse = true; //if true-> before element else next element
+    bool reverse = true; //if true-> before element; else next element
     void pushAll(TreeNode* node){
         while (node){
             stk.push(node);
@@ -28,8 +28,8 @@ public:
     int next() {
         TreeNode* node = stk.top();
         stk.pop();
-        if (reverse) pushAll(node->right);
-        else pushAll(node->left);
+        if (reverse) pushAll(node->left);
+        else pushAll(node->right);
         return node->val;
     }
     
@@ -45,12 +45,11 @@ public:
         BSTIterator after(root, false);
         int i = after.next(); // smallest element
         int j = before.next(); // largest element
-        //cout<< i << " " << j << " | ";
+        cout<< i << " " << j << " | ";
         while (i < j){
-            //cout<< i << " " << j << " | ";
             if (i + j == k) return true;
-            else if (i + j > k) i = before.next();
-            else j = after.next();
+            else if (i + j > k) j = before.next();
+            else i = after.next();
         }
         return false;
     }
