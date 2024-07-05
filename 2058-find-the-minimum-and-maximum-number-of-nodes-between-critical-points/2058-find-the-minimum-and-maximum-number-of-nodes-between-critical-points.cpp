@@ -34,7 +34,6 @@ public:
             if ((prev < node->val && node->val > node->next->val) || 
                 (prev > node->val && node->val < node->next->val)){
                 mind = min(mind, dist);
-                cout<< dist << " ";
                 maxd += dist;
                 dist = 0;
             }
