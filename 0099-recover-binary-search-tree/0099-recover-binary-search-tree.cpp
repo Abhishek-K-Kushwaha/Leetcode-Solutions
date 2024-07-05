@@ -20,11 +20,11 @@ public:
         if (root->val < prev->val){
             if (first){
                 second = root;
+                return;
             }
             else{
                 first = prev;
                 second = root;
-                return;
             }
         }
         prev = root;
@@ -32,6 +32,7 @@ public:
     }
     void recoverTree(TreeNode* root) {
         inorder(root);
+        cout<< first->val << " " << second->val << " ";
         swap(first->val, second->val);
     }
 };
