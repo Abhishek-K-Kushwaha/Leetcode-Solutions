@@ -14,7 +14,7 @@ public:
         while (!dq.empty()) {
             auto [i, j] = dq.front();
             dq.pop_front();
-            
+            if (i == m-1 && j == n-1) return cost[m-1][n-1];
             for (int k = 0; k < 4; ++k) {
                 int newi = i + dx[k];
                 int newj = j + dy[k];
