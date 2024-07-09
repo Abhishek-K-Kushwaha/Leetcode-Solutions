@@ -16,7 +16,6 @@ public:
                 freeat = arv + t;
             }
         }
-        //double avg = total/n;
         return total/n;
     }
 };
