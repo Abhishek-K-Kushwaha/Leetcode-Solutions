@@ -10,7 +10,7 @@ public:
             f(s + "0", i + 1, n, ans);
         }
     }
-    
+
     vector<string> validStrings(int n) {
         vector<string> ans;
         f("", 0, n, ans);
