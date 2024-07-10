@@ -12,27 +12,7 @@ public:
             pq; //{time{x,y}}
         vector<vector<int>> time(m, vector<int>(n, INT_MAX));
         time[0][0] = 0;
-        if (grid[0][1] <= 1) {
-            pq.push({1, {0, 1}});
-            time[0][1] = 1;
-            if (grid[1][0] % 2) {
-                pq.push({grid[1][0], {1, 0}});
-                time[1][0] = grid[1][0];
-            } else {
-                pq.push({grid[1][0] + 1, {1, 0}});
-                time[1][0] = grid[1][0] + 1;
-            }
-        } else if (grid[1][0] <= 1) {
-            pq.push({1, {1, 0}});
-            time[1][0] = 1;
-            if (grid[0][1] % 2) {
-                pq.push({grid[0][1], {0, 1}});
-                time[0][1] = grid[0][1];
-            } else {
-                pq.push({grid[0][1] + 1, {0, 1}});
-                time[0][1] = grid[0][1] + 1;
-            }
-        }
+        pq.push({0,{0,0}});
         vector<int> delx = {0, 0, -1, 1};
         vector<int> dely = {-1, 1, 0, 0};
         while (!pq.empty()) {
@@ -52,11 +32,9 @@ public:
                         time[newx][newy] = t + 1;
                     } else {
                         int diff = grid[newx][newy] - t;
-                        int newt = t;
+                        int newt = t + diff;
                         if (diff % 2 == 0)
-                            newt += (diff + 1);
-                        else
-                            newt += diff;
+                            newt++;
                         pq.push({newt, {newx, newy}});
                         time[newx][newy] = newt;
                     }
