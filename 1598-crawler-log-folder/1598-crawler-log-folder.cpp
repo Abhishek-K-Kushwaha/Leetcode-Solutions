@@ -5,9 +5,7 @@ public:
         for (auto& log : logs) {
             if (log == "../") {
                 lvl = max(0, lvl - 1);
-            } else if (log == "./") {
-                continue;
-            } else {
+            } else if (log != "./") {
                 lvl++;
             }
         }
