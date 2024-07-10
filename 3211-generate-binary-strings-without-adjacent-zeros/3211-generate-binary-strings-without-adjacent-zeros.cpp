@@ -1,19 +1,20 @@
 class Solution {
 public:
-    void f(string s, int i, int n, vector<string>& ans) {
-        if (i == n) {
-            ans.push_back(s);
+    vector<string> validStrings(int n) {
+        vector<string> res;
+        string s(n, '0');
+        backtrack(0, false, s, res);
+        return res;
+    }
+private:
+    void backtrack(int index, bool flag, string& s, vector<string>& res){
+        if (index == s.length()){
+            res.push_back(s);
             return;
         }
-        f(s + "1", i + 1, n, ans);
-        if (i == 0 || s[i - 1] == '1') {
-            f(s + "0", i + 1, n, ans);
-        }
-    }
-
-    vector<string> validStrings(int n) {
-        vector<string> ans;
-        f("", 0, n, ans);
-        return ans;
+        if (!flag) backtrack(index + 1, true, s, res);
+        s[index] = '1';
+        backtrack(index + 1, false, s, res);
+        s[index] = '0';
     }
 };
