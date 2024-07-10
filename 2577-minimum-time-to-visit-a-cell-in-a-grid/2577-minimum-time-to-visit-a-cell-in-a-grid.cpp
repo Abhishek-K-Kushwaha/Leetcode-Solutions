@@ -48,8 +48,7 @@ public:
                 int newy = y + dely[i];
                 if (newx >= 0 && newx < m && newy >= 0 && newy < n && time[newx][newy] == INT_MAX) {
                     if (grid[newx][newy] <= t + 1) {
-                        if (time[newx][newy] > t + 1)
-                            pq.push({t + 1, {newx, newy}});
+                        pq.push({t + 1, {newx, newy}});
                         time[newx][newy] = t + 1;
                     } else {
                         int diff = grid[newx][newy] - t;
@@ -58,8 +57,7 @@ public:
                             newt += (diff + 1);
                         else
                             newt += diff;
-                        if (time[newx][newy] > newt)
-                            pq.push({newt, {newx, newy}});
+                        pq.push({newt, {newx, newy}});
                         time[newx][newy] = newt;
                     }
                 }
