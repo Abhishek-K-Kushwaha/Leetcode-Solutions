@@ -46,7 +46,7 @@ public:
             for (int i = 0; i < 4; i++) {
                 int newx = x + delx[i];
                 int newy = y + dely[i];
-                if (newx >= 0 && newx < m && newy >= 0 && newy < n) {
+                if (newx >= 0 && newx < m && newy >= 0 && newy < n && time[newx][newy] == INT_MAX) {
                     if (grid[newx][newy] <= t + 1) {
                         if (time[newx][newy] > t + 1)
                             pq.push({t + 1, {newx, newy}});
