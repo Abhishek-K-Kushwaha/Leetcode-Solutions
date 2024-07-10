@@ -15,24 +15,21 @@ public:
         if (grid[0][1] <= 1) {
             pq.push({1, {0, 1}});
             time[0][1] = 1;
-            if (grid[1][0] % 2){
-                pq.push({grid[1][0],{1,0}});
+            if (grid[1][0] % 2) {
+                pq.push({grid[1][0], {1, 0}});
                 time[1][0] = grid[1][0];
-            }
-            else{
-                pq.push({grid[1][0]+1,{1,0}});
+            } else {
+                pq.push({grid[1][0] + 1, {1, 0}});
                 time[1][0] = grid[1][0] + 1;
             }
-        }
-        else if (grid[1][0] <= 1) {
+        } else if (grid[1][0] <= 1) {
             pq.push({1, {1, 0}});
             time[1][0] = 1;
-            if (grid[0][1] % 2){
-                pq.push({grid[0][1], {0,1}});
+            if (grid[0][1] % 2) {
+                pq.push({grid[0][1], {0, 1}});
                 time[0][1] = grid[0][1];
-            }
-            else {
-                pq.push({grid[0][1] + 1, {0,1}});
+            } else {
+                pq.push({grid[0][1] + 1, {0, 1}});
                 time[0][1] = grid[0][1] + 1;
             }
         }
@@ -53,7 +50,7 @@ public:
                     if (grid[newx][newy] <= t + 1) {
                         if (time[newx][newy] > t + 1)
                             pq.push({t + 1, {newx, newy}});
-                            time[newx][newy] = t+1;
+                        time[newx][newy] = t + 1;
                     } else {
                         int diff = grid[newx][newy] - t;
                         int newt = t;
@@ -63,7 +60,7 @@ public:
                             newt += diff;
                         if (time[newx][newy] > newt)
                             pq.push({newt, {newx, newy}});
-                            time[newx][newy] = newt;
+                        time[newx][newy] = newt;
                     }
                 }
             }
