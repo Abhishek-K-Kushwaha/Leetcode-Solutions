@@ -9,13 +9,20 @@ public:
         for (int i = 2; i <= n; i++){
             curr[1] = 1; 
             for (int j = 2; j <= k; j++){
-                int ans = INT_MAX;
-                for (int x = 1; x <= j; x++){
-                    int brk = 1 + prev[x-1]; //f(n-1, i-1, dp);
-                    int notbrk = 1 + curr[j-x]; //f(n, k-i, dp);
-                    ans = min(ans, max(brk,notbrk));
+                curr[j] = INT_MAX;
+                int low = 1, high = j;
+                while (low <= high) {
+                    int mid = (low + high) / 2;
+                    int brk = 1 + prev[mid - 1];
+                    int notbrk = 1 + curr[j - mid];
+                    int worst = max(brk, notbrk);
+                    curr[j] = min(curr[j], worst);
+                    if (brk > notbrk) {
+                        high = mid - 1;
+                    } else {
+                        low = mid + 1;
+                    }
                 }
-                curr[j] = ans;
             }
             prev = curr;
         }
