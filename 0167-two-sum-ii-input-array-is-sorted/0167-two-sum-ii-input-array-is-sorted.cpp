@@ -4,7 +4,6 @@ public:
         int n = nums.size();
         int left = 0;
         int right = n-1;
-        //vector<int> ans;
         while (left < right){
             int sum = nums[left]+nums[right];
             if (sum == target) return {left+1, right+1};
