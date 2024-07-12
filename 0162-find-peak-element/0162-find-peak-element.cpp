@@ -9,7 +9,6 @@ public:
         while (i <= j){
             if (j - i == 1) return i + (nums[i] < nums[j]);
             int mid = i + (j - i)/2;
-            //cout<< mid << " ";
             if (mid == 0 && nums[mid+1] < nums[mid]){
                 return mid;
             }
