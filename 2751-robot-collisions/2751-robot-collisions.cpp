@@ -10,43 +10,41 @@ public:
         stack<int> stk; // index
         for (auto it : dict) {
             int ind = it.second;
-            if (stk.empty() || directions[stk.top()] == 'L' ||
-                directions[ind] == 'R') {
+            if (directions[ind] == 'R') {
                 stk.push(ind);
-            } else {
-                if (healths[ind] == healths[stk.top()]) {
-                    stk.pop();
-                } else if (healths[ind] < healths[stk.top()]) {
-                    healths[stk.top()]--;
-                } else {
-                    while (!stk.empty() && healths[stk.top()] < healths[ind] &&
-                           directions[stk.top()] == 'R') {
-                        healths[ind]--;
+            } 
+            else {
+                while (!stk.empty() && healths[ind] > 0) {
+                    // healths[ind]--;
+                    // stk.pop();
+                    if (healths[stk.top()] == healths[ind]){
+                        healths[stk.top()] = 0;
                         stk.pop();
+                        healths[ind] = 0;
                     }
-                    if (stk.empty())
-                        stk.push(ind);
-                    else if (healths[stk.top()] == healths[ind] &&
-                             directions[stk.top()] == 'R')
-                        stk.pop();
-                    else if (directions[stk.top()] == 'R')
+                    else if (healths[stk.top()] > healths[ind]){
                         healths[stk.top()]--;
-                    else
-                        stk.push(ind);
+                        healths[ind] = 0;
+                    }
+                    else{
+                        healths[stk.top()] = 0;
+                        stk.pop();
+                        healths[ind]--;
+                    }
                 }
             }
         }
         // int len = stk.size();
-        set<int> ans;
-        // int i = len-1;
-        while (!stk.empty()) {
-            ans.insert(stk.top());
-            stk.pop();
-            // i--;
-        }
+        // set<int> ans;
+        // // int i = len-1;
+        // while (!stk.empty()) {
+        //     ans.insert(stk.top());
+        //     stk.pop();
+        //     // i--;
+        // }
         vector<int> result;
-        for (int i : ans) {
-            result.push_back(healths[i]);
+        for (int i : healths) {
+            if (i) result.push_back(i);
         }
         return result;
     }
