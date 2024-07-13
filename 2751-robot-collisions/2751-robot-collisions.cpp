@@ -15,8 +15,6 @@ public:
             } 
             else {
                 while (!stk.empty() && healths[ind] > 0) {
-                    // healths[ind]--;
-                    // stk.pop();
                     if (healths[stk.top()] == healths[ind]){
                         healths[stk.top()] = 0;
                         stk.pop();
@@ -34,14 +32,6 @@ public:
                 }
             }
         }
-        // int len = stk.size();
-        // set<int> ans;
-        // // int i = len-1;
-        // while (!stk.empty()) {
-        //     ans.insert(stk.top());
-        //     stk.pop();
-        //     // i--;
-        // }
         vector<int> result;
         for (int i : healths) {
             if (i) result.push_back(i);
