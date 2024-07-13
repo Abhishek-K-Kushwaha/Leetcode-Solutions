@@ -9,7 +9,7 @@ public:
         stack<int> stk; // index
         for (auto it:dict){
             //int pos = it.first;
-            cout<< it.second << " ";
+            //cout<< it.second << " ";
             int ind = it.second;
             if (stk.empty() || directions[stk.top()] == 'L' || directions[ind] == 'R'){
                 // if (directions[ind] == 'L') stk.push({health[ind], -1});
