@@ -1,41 +1,43 @@
 class Solution {
 public:
-    vector<int> survivedRobotsHealths(vector<int>& positions,
-                                      vector<int>& healths, string directions) {
-        map<int, int> dict; // position --> index of robot
+        vector<int> survivedRobotsHealths(vector<int>& positions, vector<int>& healths, string directions) {
         int n = positions.size();
-        for (int i = 0; i < n; i++) {
-            dict[positions[i]] = i;
+        vector<pair<int, int>> robots;
+        for (int i = 0; i < n; ++i) {
+            robots.push_back({positions[i], i});
         }
-        stack<int> stk; // index
-        for (auto it : dict) {
-            int ind = it.second;
+        sort(robots.begin(), robots.end());
+
+        stack<int> stk; // stack to store the indices of robots
+        for (auto& robot : robots) {
+            int ind = robot.second;
             if (directions[ind] == 'R') {
                 stk.push(ind);
-            } 
-            else {
+            } else {
                 while (!stk.empty() && healths[ind] > 0) {
-                    if (healths[stk.top()] == healths[ind]){
-                        healths[stk.top()] = 0;
-                        stk.pop();
+                    int topIndex = stk.top();
+
+                    if (healths[topIndex] == healths[ind]) {
+                        healths[topIndex] = 0;
                         healths[ind] = 0;
-                    }
-                    else if (healths[stk.top()] > healths[ind]){
-                        healths[stk.top()]--;
-                        healths[ind] = 0;
-                    }
-                    else{
-                        healths[stk.top()] = 0;
                         stk.pop();
+                    } else if (healths[topIndex] > healths[ind]) {
+                        healths[topIndex]--;
+                        healths[ind] = 0;
+                    } else {
                         healths[ind]--;
+                        healths[topIndex] = 0;
+                        stk.pop();
                     }
                 }
             }
         }
+
         vector<int> result;
-        for (int i : healths) {
-            if (i) result.push_back(i);
+        for (int h : healths) {
+            if (h > 0) result.push_back(h);
         }
+
         return result;
     }
 };
