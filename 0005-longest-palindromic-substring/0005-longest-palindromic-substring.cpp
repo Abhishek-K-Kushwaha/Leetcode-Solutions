@@ -5,7 +5,6 @@ public:
         if (n == 1) return s;
         int len = 1;
         int start = 0;
-        //int maxj;
         for (int ind = 1; ind < n-1; ind++){
             if (s[ind-1] == s[ind+1]){
                 int i = ind-2;
@@ -16,7 +15,6 @@ public:
                 }
                 if (j-i-1 > len){
                     start = i+1;
-                    // maxj = j-1;
                     len = j-i-1;
                 }
             }
@@ -29,7 +27,6 @@ public:
                 }
                 if (j-i-1 > len){
                     start = i+1;
-                    // maxj = j-1;
                     len = j-i-1;
                 }
             }
