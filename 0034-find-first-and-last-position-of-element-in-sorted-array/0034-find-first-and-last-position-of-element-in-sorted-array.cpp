@@ -9,7 +9,7 @@ public:
         int j = n-1;
         if (nums[0] == target){ 
             left = 0;
-            j = -100;
+            j = -1;
         }
         while (i <= j){
             int mid = i + (j-i)/2;
@@ -27,7 +27,7 @@ public:
         j = n-1;
         if (nums[n-1] == target){ 
             right = n-1;
-            j = -100;
+            j = -1;
         }
         while (i <= j){
             int mid = i + (j-i)/2;
