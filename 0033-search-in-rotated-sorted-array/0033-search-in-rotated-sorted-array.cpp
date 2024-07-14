@@ -17,7 +17,6 @@ public:
             int j = n-1;
             while (i <= j){
                 int mid = i + (j-i)/2;
-                //cout<< mid << " ";
                 if (nums[mid] == target) return mid;
                 if (nums[mid] > nums[mid+1]){ 
                     pivot = mid;
@@ -27,7 +26,6 @@ public:
                 else j = mid-1;
             }
         }
-        //cout<< pivot;
         if (pivot == -1){
             int i = 0;
             int j = n-1;
