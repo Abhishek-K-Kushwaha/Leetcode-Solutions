@@ -17,16 +17,17 @@ public:
             int j = n-1;
             while (i <= j){
                 int mid = i + (j-i)/2;
+                //cout<< mid << " ";
                 if (nums[mid] == target) return mid;
-                if (mid == 0 || (nums[mid-1] < nums[mid] && nums[mid] > nums[mid+1])){ 
+                if (nums[mid] > nums[mid+1]){ 
                     pivot = mid;
                     break;
                 }
                 if (nums[mid] > nums[n-1]) i = mid+1;
-                if (nums[mid] < nums[n-1]) j = mid-1;
+                else j = mid-1;
             }
         }
-        cout<< pivot;
+        //cout<< pivot;
         if (pivot == -1){
             int i = 0;
             int j = n-1;
