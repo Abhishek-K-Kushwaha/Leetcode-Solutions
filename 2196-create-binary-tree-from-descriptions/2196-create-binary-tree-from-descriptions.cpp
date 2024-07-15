@@ -12,7 +12,7 @@
 class Solution {
 public:
     TreeNode* createBinaryTree(vector<vector<int>>& descriptions) {
-        unordered_map<int,pair<TreeNode*,bool>> dict; // value->node,ischild
+        unordered_map<int,pair<TreeNode*,bool>> dict; // value->{node,isChild}
         for (auto& it:descriptions){
             TreeNode* parent; 
             TreeNode* child;
