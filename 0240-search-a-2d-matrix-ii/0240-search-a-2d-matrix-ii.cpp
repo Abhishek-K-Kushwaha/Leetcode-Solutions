@@ -9,9 +9,9 @@ public:
             if (target > matrix[up][right]) up++;
             else if (target < matrix[up][right]) right--;
             else return true;
-            if (target > matrix[down][left]) left++;
-            else if (target < matrix[down][left]) down--;
-            else return true;
+            // if (target > matrix[down][left]) left++;
+            // else if (target < matrix[down][left]) down--;
+            // else return true;
         }
         return false;;
     }
