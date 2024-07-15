@@ -15,7 +15,6 @@ public:
         for (auto it:st){
             ans.push_back(it.second);
             i++;
-            //if (i == k) return ans;
         }
         return ans;
     }
