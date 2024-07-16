@@ -32,20 +32,19 @@ public:
         preorder(root, src, startValue);
         preorder(root, dst, destValue);
         int i = 0;
-        //int j = 0;
         while (i < src.size() && i < dst.size()){
             if (src[i] == dst[i]){
                 i++; //j++;
             }
             else break;
         }
-        src = src.substr(i, src.size() - i);
+        //src = src.substr(i, src.size() - i);
         int len = i;
-        i = 0;
+        //i = 0;
         while (i < src.size()){
             src[i] = 'U';
             i++;
         }
-        return src + dst.substr(len, dst.size()-len);
+        return src.substr(len, src.size()-len) + dst.substr(len, dst.size()-len);
     }
 };
