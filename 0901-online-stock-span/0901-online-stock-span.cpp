@@ -7,18 +7,12 @@ public:
     
     int next(int price) {
         int ans = 1;
-        // if (price >= stk.top().first){
-            while (!stk.empty() && price >= stk.top().first){
-                ans += stk.top().second;
-                stk.pop();
-            }
-            // stk.push({price,ans});
-            // return ans;
-        ///}
-        //else{
-            stk.push({price, ans});
-            return ans;
-        //}
+        while (!stk.empty() && price >= stk.top().first){
+            ans += stk.top().second;
+            stk.pop();
+        }
+        stk.push({price, ans});
+        return ans;
     }
 };
 
