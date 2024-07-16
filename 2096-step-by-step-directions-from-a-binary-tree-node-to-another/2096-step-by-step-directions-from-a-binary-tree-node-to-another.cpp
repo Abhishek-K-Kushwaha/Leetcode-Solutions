@@ -1,50 +1,22 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left),
- * right(right) {}
- * };
- */
 class Solution {
 public:
-    bool preorder(TreeNode* node, string& ans, int tar) {
-        if (node == nullptr)
-            return false;
-        if (node->val == tar)
+    bool find(TreeNode* n, int val, string& path) {
+        if (n->val == val)
             return true;
-
-        ans.push_back('L');
-        if (preorder(node->left, ans, tar))
-            return true;
-        ans.pop_back();
-
-        ans.push_back('R');
-        if (preorder(node->right, ans, tar))
-            return true;
-        ans.pop_back();
-
-        return false;
+        if (n->left && find(n->left, val, path))
+            path.push_back('L');
+        else if (n->right && find(n->right, val, path))
+            path.push_back('R');
+        return !path.empty();
     }
     string getDirections(TreeNode* root, int startValue, int destValue) {
-        string src = "";
-        string dst = "";
-        preorder(root, src, startValue);
-        preorder(root, dst, destValue);
-        int i = 0;
-        int n = src.size();
-        int m = dst.size();
-        while (i < min(n, m)) {
-            if (src[i] == dst[i]) {
-                i++;
-            } else
-                break;
+        string s_p, d_p;
+        find(root, startValue, s_p);
+        find(root, destValue, d_p);
+        while (!s_p.empty() && !d_p.empty() && s_p.back() == d_p.back()) {
+            s_p.pop_back();
+            d_p.pop_back();
         }
-        int len = i;
-        return string(n - len, 'U') + dst.substr(len, m - len);
+        return string(s_p.size(), 'U') + string(rbegin(d_p), rend(d_p));
     }
 };
