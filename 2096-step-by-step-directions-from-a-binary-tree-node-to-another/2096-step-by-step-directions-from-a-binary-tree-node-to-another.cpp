@@ -45,10 +45,10 @@ public:
                 break;
         }
         int len = i;
-        while (i < n) {
-            src[i] = 'U';
-            i++;
-        }
-        return src.substr(len, n - len) + dst.substr(len, m - len);
+        // while (i < n) {
+        //     src[i] = 'U';
+        //     i++;
+        // }
+        return string(n - len, 'U') + dst.substr(len, m - len);
     }
 };
