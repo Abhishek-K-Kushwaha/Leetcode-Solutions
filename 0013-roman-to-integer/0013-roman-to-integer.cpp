@@ -30,8 +30,8 @@ public:
                 }
                 else ans += 100;
             }
-            else if (s[i] == 'D') ans+= 500;
-            else ans+=1000;
+            else if (s[i] == 'D') ans += 500;
+            else ans += 1000;
             i++;
         }
         return ans;
