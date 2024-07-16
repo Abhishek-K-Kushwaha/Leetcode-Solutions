@@ -3,36 +3,14 @@ public:
     int romanToInt(string s) {
         int n = s.size();
         int ans = 0;
+        unordered_map<char,int> dict;
+        dict['I'] = 1; dict['V'] = 5; dict['X'] = 10; dict['L'] = 50; 
+        dict['C'] = 100; dict['D'] = 500; dict['M'] = 1000;
         int i = 0;
         while (i < n){
-            if (s[i] == 'I'){
-                if (i+1 != n){
-                    if (s[i+1] == 'V' || s[i+1] == 'X') ans--;
-                    else ans++;
-                }
-                else ans++;
-            }
-            else if (s[i] == 'V'){
-                ans+= 5;
-            }
-            else if (s[i] == 'X'){
-                if (i+1 != n){
-                    if (s[i+1] == 'L' || s[i+1] == 'C') ans -= 10;
-                    else ans += 10;
-                }
-                else ans += 10;
-            }
-            else if (s[i] == 'L') ans+= 50;
-            else if (s[i] == 'C'){
-                if (i+1 != n){
-                    if (s[i+1] == 'D' || s[i+1] == 'M') ans -= 100;
-                    else ans += 100;
-                }
-                else ans += 100;
-            }
-            else if (s[i] == 'D') ans += 500;
-            else ans += 1000;
-            i++;
+            if (dict[s[i]] < dict[s[i+1]]) ans -= dict[s[i]];
+            else ans += dict[s[i]];
+            i++; 
         }
         return ans;
     }
