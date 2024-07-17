@@ -20,10 +20,12 @@ public:
         TreeNode* r = node->right;
         postorder(l, del, ans);
         postorder(r, del, ans);
-        if (l && (del.find(l->val) != del.end()))
+        if (l && (del.find(l->val) != del.end())){
             node->left = nullptr;
-        if (r && (del.find(r->val) != del.end()))
+            del.erase(l->val);}
+        if (r && (del.find(r->val) != del.end())){
             node->right = nullptr;
+            del.erase(r->val);}
         if (del.find(node->val) != del.end()) {
             if (node->left)
                 ans.push_back(node->left);
