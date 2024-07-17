@@ -19,7 +19,7 @@ public:
                 l2 = nums2[mid2 - 1];
             if (mid2 < n)
                 r2 = nums2[mid2];
-                
+
             if (l1 > r2) {
                 j = mid1 - 1;
             } else if (l2 > r1) {
