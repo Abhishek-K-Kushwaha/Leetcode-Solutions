@@ -17,15 +17,8 @@ public:
         TreeNode* r = node->right;
         postorder(l, del, ans);
         postorder(r, del, ans);
-        if (l && (del.find(l->val) != del.end())){
-            node->left = nullptr;
-            // if (l->left) ans.push_back(l->left);
-            // if (l->right) ans.push_back(l->right);
-        }
-        if (r && (del.find(r->val) != del.end())){
-            node->right = nullptr;
-            // ans.push_back(r);
-        }
+        if (l && (del.find(l->val) != del.end())) node->left = nullptr;
+        if (r && (del.find(r->val) != del.end())) node->right = nullptr;
         if (del.find(node->val) != del.end()){
             if (node->left) ans.push_back(node->left);
             if (node->right) ans.push_back(node->right);
