@@ -1,44 +1,37 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
- *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
- *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
- * };
- */
 class Solution {
 public:
-    unordered_map<TreeNode*,TreeNode*> parent;
-    vector<TreeNode*> leafs;
-    bool inorder(TreeNode* node){
-        if (node == nullptr) return false;
-        if (!node->left && !node->right) leafs.push_back(node);
-        if (inorder(node->left)) parent[node->left] = node;
-        if (inorder(node->right)) parent[node->right] = node;
-        return true;
-    }
-
-    void dfs(TreeNode* node, unordered_set<TreeNode*>& vis, int dist, int& range, int& ans){
-        if (dist > range || node == nullptr) return;
-        vis.insert(node);
-        if (dist && !node->left && !node->right) ans++;
-        if (vis.find(node->left) == vis.end()) dfs(node->left, vis, dist+1, range, ans);
-        if (vis.find(node->right) == vis.end()) dfs(node->right, vis, dist+1, range, ans);     
-        if (vis.find(parent[node]) == vis.end()) dfs(parent[node], vis, dist+1, range, ans);   
-    }
-
     int countPairs(TreeNode* root, int distance) {
-        inorder(root);
-        unordered_set<TreeNode*> vis; 
-        int ans = 0;
-        for (auto it:leafs){
-            //vis.insert(it);
-            dfs(it, vis, 0, distance, ans);
-            vis.clear();            
+        unordered_map<TreeNode*, vector<TreeNode*>> map;
+        vector<TreeNode*> leaves;
+        findLeaves(root, {}, leaves, map);
+        int res = 0;
+        for (int i = 0; i < leaves.size(); i++) {
+            for (int j = i + 1; j < leaves.size(); j++) {
+                vector<TreeNode*>& list_i = map[leaves[i]];
+                vector<TreeNode*>& list_j = map[leaves[j]];
+                for (int k = 0; k < min(list_i.size(), list_j.size()); k++) {
+                    if (list_i[k] != list_j[k]) {
+                        int dist = list_i.size() - k + list_j.size() - k;
+                        if (dist <= distance) res++;
+                        break;
+                    }
+                }
+            }
         }
-        return ans/2;
+        return res;
+    }
+
+private:
+    void findLeaves(TreeNode* node, vector<TreeNode*> trail, vector<TreeNode*>& leaves, unordered_map<TreeNode*, vector<TreeNode*>>& map) {
+        if (!node) return;
+        vector<TreeNode*> tmp(trail);
+        tmp.push_back(node);
+        if (!node->left && !node->right) {
+            map[node] = tmp;
+            leaves.push_back(node);
+            return;
+        }
+        findLeaves(node->left, tmp, leaves, map);
+        findLeaves(node->right, tmp, leaves, map);
     }
 };
