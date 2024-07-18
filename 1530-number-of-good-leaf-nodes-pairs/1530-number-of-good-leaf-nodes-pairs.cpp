@@ -1,37 +1,37 @@
 class Solution {
 public:
     int countPairs(TreeNode* root, int distance) {
-        unordered_map<TreeNode*, vector<TreeNode*>> map;
-        vector<TreeNode*> leaves;
-        findLeaves(root, {}, leaves, map);
-        int res = 0;
-        for (int i = 0; i < leaves.size(); i++) {
-            for (int j = i + 1; j < leaves.size(); j++) {
-                vector<TreeNode*>& list_i = map[leaves[i]];
-                vector<TreeNode*>& list_j = map[leaves[j]];
-                for (int k = 0; k < min(list_i.size(), list_j.size()); k++) {
-                    if (list_i[k] != list_j[k]) {
-                        int dist = list_i.size() - k + list_j.size() - k;
-                        if (dist <= distance) res++;
-                        break;
-                    }
+        return postOrder(root, distance)[11];
+    }
+    
+private:
+    vector<int> postOrder(TreeNode* node, int distance) {
+        if (!node) return vector<int>(12, 0);
+        if (!node->left && !node->right) {
+            vector<int> current(12, 0);
+            current[0] = 1;
+            return current;
+        }
+        
+        vector<int> left = postOrder(node->left, distance);
+        vector<int> right = postOrder(node->right, distance);
+        
+        vector<int> current(12, 0);
+        
+        for (int i = 0; i < 10; i++) {
+            current[i + 1] += left[i] + right[i];
+        }
+        
+        current[11] += left[11] + right[11];
+        
+        for (int d1 = 0; d1 <= distance; d1++) {
+            for (int d2 = 0; d2 <= distance; d2++) {
+                if (2 + d1 + d2 <= distance) {
+                    current[11] += left[d1] * right[d2];
                 }
             }
         }
-        return res;
-    }
-
-private:
-    void findLeaves(TreeNode* node, vector<TreeNode*> trail, vector<TreeNode*>& leaves, unordered_map<TreeNode*, vector<TreeNode*>>& map) {
-        if (!node) return;
-        vector<TreeNode*> tmp(trail);
-        tmp.push_back(node);
-        if (!node->left && !node->right) {
-            map[node] = tmp;
-            leaves.push_back(node);
-            return;
-        }
-        findLeaves(node->left, tmp, leaves, map);
-        findLeaves(node->right, tmp, leaves, map);
+        
+        return current;
     }
 };
