@@ -1,53 +1,37 @@
 class Solution {
 public:
     int countPairs(TreeNode* root, int distance) {
-        unordered_map<TreeNode*, vector<TreeNode*>> graph;
-        unordered_set<TreeNode*> leafNodes;
-
-        traverseTree(root, nullptr, graph, leafNodes);
-
-        int ans = 0;
-        for (TreeNode* leaf : leafNodes) {
-            queue<TreeNode*> bfsQueue;
-            unordered_set<TreeNode*> seen;
-            bfsQueue.push(leaf);
-            seen.insert(leaf);
-
-            for (int i = 0; i <= distance; i++) {
-                int size = bfsQueue.size();
-                for (int j = 0; j < size; j++) {
-                    TreeNode* currNode = bfsQueue.front();
-                    bfsQueue.pop();
-                    if (leafNodes.count(currNode) && currNode != leaf) {
-                        ans++;
-                    }
-                    if (graph.count(currNode)) {
-                        for (TreeNode* neighbor : graph[currNode]) {
-                            if (!seen.count(neighbor)) {
-                                bfsQueue.push(neighbor);
-                                seen.insert(neighbor);
-                            }
-                        }
-                    }
+        return postOrder(root, distance)[11];
+    }
+    
+private:
+    vector<int> postOrder(TreeNode* node, int distance) {
+        if (!node) return vector<int>(12, 0);
+        if (!node->left && !node->right) {
+            vector<int> current(12, 0);
+            current[0] = 1;
+            return current;
+        }
+        
+        vector<int> left = postOrder(node->left, distance);
+        vector<int> right = postOrder(node->right, distance);
+        
+        vector<int> current(12, 0);
+        
+        for (int i = 0; i < 10; i++) {
+            current[i + 1] += left[i] + right[i];
+        }
+        
+        current[11] += left[11] + right[11];
+        
+        for (int d1 = 0; d1 <= distance; d1++) {
+            for (int d2 = 0; d2 <= distance; d2++) {
+                if (2 + d1 + d2 <= distance) {
+                    current[11] += left[d1] * right[d2];
                 }
             }
         }
-        return ans / 2;
-    }
-
-private:
-    void traverseTree(TreeNode* currNode, TreeNode* prevNode, 
-                      unordered_map<TreeNode*, vector<TreeNode*>>& graph, 
-                      unordered_set<TreeNode*>& leafNodes) {
-        if (!currNode) return;
-        if (!currNode->left && !currNode->right) {
-            leafNodes.insert(currNode);
-        }
-        if (prevNode) {
-            graph[prevNode].push_back(currNode);
-            graph[currNode].push_back(prevNode);
-        }
-        traverseTree(currNode->left, currNode, graph, leafNodes);
-        traverseTree(currNode->right, currNode, graph, leafNodes);
+        
+        return current;
     }
 };
