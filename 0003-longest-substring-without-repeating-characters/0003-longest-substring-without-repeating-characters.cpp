@@ -5,22 +5,16 @@ public:
         int i = 0;
         int j = 0;
         int ans = 0;
-        unordered_map<char,int> st;
+        unordered_set<char> st;
         while (j < n){
-            if (st.find(s[j]) != st.end()){
-                ans = max(ans, j - i);
-                ans = max(ans, j - st[s[j]]);
-                while (s[i] != s[j]){
-                    st.erase(s[i]);
-                    i++;
-                }
+            while (st.find(s[j]) != st.end()){
                 st.erase(s[i]);
                 i++;
             }
-            st[s[j]] = j;
+            st.insert(s[j]);
+            ans = max(ans, j - i + 1);
             j++;
         }
-        ans = max(ans, (int)st.size());
         return ans;
     }
 };
