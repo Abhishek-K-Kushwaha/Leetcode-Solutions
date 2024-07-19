@@ -5,7 +5,7 @@ public:
         int i = 0;
         int j = 0;
         int ans = 0;
-        unordered_set<char> st;
+        unordered_set<char> st(100);
         while (j < n){
             while (st.find(s[j]) != st.end()){
                 st.erase(s[i]);
