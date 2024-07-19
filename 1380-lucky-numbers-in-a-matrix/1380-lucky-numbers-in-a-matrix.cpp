@@ -3,7 +3,6 @@ public:
     vector<int> luckyNumbers (vector<vector<int>>& matrix) {
         int m = matrix.size();
         int n = matrix[0].size();
-
         vector<int> ans;
         for (int i = 0; i < m; i++){
             int minele = INT_MAX;
@@ -22,7 +21,6 @@ public:
                 }
             }
             if (flag) ans.push_back(matrix[cord.first][cord.second]);
-
         }
         return ans;
     }
