@@ -15,7 +15,10 @@ public:
         vector<int> ans;
         for (int i = 0; i < m; i++){
             for (int j = 0; j < n; j++){
-                if (matrix[i][j] == rowdata[i] && matrix[i][j] == coldata[j]) ans.push_back(matrix[i][j]);
+                if (matrix[i][j] == rowdata[i] && matrix[i][j] == coldata[j]){ 
+                    ans.push_back(matrix[i][j]);
+                    break;
+                }
             }
         }
         return ans;
