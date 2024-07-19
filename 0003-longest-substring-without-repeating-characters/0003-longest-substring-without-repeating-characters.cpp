@@ -14,7 +14,6 @@ public:
             else{
                 ans = max(ans, j - i);
                 ans = max(ans, j - st[s[j]]);
-                //cout<< ans << " " << i << " " << j <<"\n";
                 while (s[i] != s[j]){
                     st.erase(s[i]);
                     i++;
@@ -26,10 +25,6 @@ public:
 
             }
         }
-        //cout << st.size() << "\n";
-        // for (auto it:st){
-        //     cout << it.first << " " << it.second << " ";
-        // }
         ans = max(ans, (int)st.size());
         return ans;
     }
