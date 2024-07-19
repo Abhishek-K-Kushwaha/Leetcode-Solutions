@@ -20,7 +20,10 @@ public:
                     break;
                 }
             }
-            if (flag) ans.push_back(matrix[cord.first][cord.second]);
+            if (flag){ 
+                ans.push_back(matrix[cord.first][cord.second]);
+                break;
+            }
         }
         return ans;
     }
