@@ -7,11 +7,7 @@ public:
         int ans = 0;
         unordered_map<char,int> st;
         while (j < n){
-            if (st.find(s[j]) == st.end()){
-                st[s[j]] = j;
-                j++;
-            }
-            else{
+            if (st.find(s[j]) != st.end()){
                 ans = max(ans, j - i);
                 ans = max(ans, j - st[s[j]]);
                 while (s[i] != s[j]){
@@ -19,11 +15,10 @@ public:
                     i++;
                 }
                 st.erase(s[i]);
-                st[s[j]] = j;
                 i++;
-                j++;
-
             }
+            st[s[j]] = j;
+            j++;
         }
         ans = max(ans, (int)st.size());
         return ans;
