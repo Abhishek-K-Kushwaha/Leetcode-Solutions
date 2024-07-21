@@ -7,11 +7,10 @@ private:
         vis[node] = true;
         path[node] = true;
 
-        if (!adj[node].empty()){
-            for (auto nxt : adj[node]){
-                if (dfs(nxt, iscol, vis, cords, adj, path)) return true;
-            }
+        for (auto nxt : adj[node]){
+            if (dfs(nxt, iscol, vis, cords, adj, path)) return true;
         }
+        
         cords[node][iscol] = counter;
         counter--;
         path[node] = false;
@@ -29,6 +28,7 @@ public:
         for (auto& it: rowConditions){
             adj[it[0]].insert(it[1]);
         }
+
         vector<bool> path(k+1, 0);
         for (int node = 1; node <= k; node++){
             if (dfs(node, 0, vis, cords, adj, path)) return {}; // for getting rows
@@ -45,7 +45,6 @@ public:
         }
         
         for (int node = 1; node <= k; node++){
-            //vector<bool> path(k+1, 0);
             if (dfs(node, 1, vis, cords, adj, path)) return {};// for getting cols
         }
 
