@@ -49,11 +49,6 @@ public:
             if (dfs(node, 1, vis, cords, adj, path, ans)) return {};// for getting cols
         }
 
-        // for (int i = 1; i <= k; i++){
-        //     int r = cords[i][0];
-        //     int c = cords[i][1];
-        //     ans[r][c] = i;
-        // }
         return ans;        
     }
 };
