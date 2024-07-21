@@ -38,7 +38,7 @@ public:
 
         // Reset for column conditions
         fill(vis.begin(), vis.end(), false);
-        fill(path.begin(), path.end(), false);
+        //fill(path.begin(), path.end(), false);
         counter = k-1;
 
         // Build adjacency list for column conditions
