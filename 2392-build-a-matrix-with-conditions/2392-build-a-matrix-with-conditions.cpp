@@ -35,19 +35,20 @@ public:
             if (dfs(node, 0, vis, cords, adj, path)) return {}; // for getting rows
         }
         counter = k-1;
-        vector<unordered_set<int>> adjcol(k+1);
+        //vector<unordered_set<int>> adjcol(k+1);
         //vector<bool> viscol(k+1, 0);
         for (int i = 1; i <=k; i++){
             vis[i] = false;
+            adj[i].clear();
         }
 
         for (auto& it: colConditions){
-            adjcol[it[0]].insert(it[1]);
+            adj[it[0]].insert(it[1]);
         }
         
         for (int node = 1; node <= k; node++){
             vector<bool> path(k+1, 0);
-            if (dfs(node, 1, vis, cords, adjcol, path)) return {};// for getting cols
+            if (dfs(node, 1, vis, cords, adj, path)) return {};// for getting cols
         }
 
         for (int i = 1; i <= k; i++){
