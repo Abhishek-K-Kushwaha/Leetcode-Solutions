@@ -46,7 +46,7 @@ public:
         }
         
         for (int node = 1; node <= k; node++){
-            if (dfs(node, 1, vis, cords, adj, path, ans)) return {};// for getting cols
+            if (dfs(node, 1, vis, cords, adj, path, ans)) return {}; // for getting cols
         }
 
         return ans;        
