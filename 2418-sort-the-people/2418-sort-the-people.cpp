@@ -1,15 +1,17 @@
 class Solution {
 public:
     vector<string> sortPeople(vector<string>& names, vector<int>& heights) {
-        vector<string> ans;
+        //vector<string> ans;
         map<int,string> dict;
         int n = names.size();
         for (int i = 0; i < n; i++){
             dict[-heights[i]] = names[i];
         }
+        int i = 0;
         for (auto& it:dict){
-            ans.push_back(it.second);
+            names[i] = (it.second);
+            i++;
         }
-        return ans;
+        return names;
     }
 };
