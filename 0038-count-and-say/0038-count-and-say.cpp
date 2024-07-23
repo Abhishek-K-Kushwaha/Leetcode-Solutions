@@ -17,7 +17,6 @@ public:
         }
         ans.push_back(char(cnt+48));
         ans.push_back(str[n-1]);
-        //cout << ans << "\n";
         return f(i+1, ans);
     }
     string countAndSay(int n) {
