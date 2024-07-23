@@ -17,7 +17,7 @@ public:
                char ch = helper[i].first;
                int frequency = helper[i].second;
                string reference = string(frequency, ch);
-               ans += reference;
+               ans.append(reference);
            }
        }
        return ans;
