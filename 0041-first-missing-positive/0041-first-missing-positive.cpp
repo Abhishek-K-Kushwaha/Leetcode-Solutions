@@ -4,7 +4,7 @@ public:
         int n = nums.size();
         int i = 0;
         while (i < n){
-            int ind = nums[i]-1;
+            long ind = (long)nums[i]-1;
             bool isValid = (ind >= 0 && ind < n);
             if (isValid && nums[ind] != nums[i]){
                 swap(nums[ind], nums[i]);
