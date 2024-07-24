@@ -22,9 +22,9 @@ public:
             ind++;
         }
         sort(nums.begin(), nums.end(), [&](int a, int b){
-            int inda = vals[a].first; //find(nums.begin(), nums.end(), a) - nums.begin();
-            int indb = vals[b].first; //find(nums.begin(), nums.end(), b) - nums.begin();
-            if (vals[a].second == vals[b].second) return inda < indb;
+            //int inda = vals[a].first; //find(nums.begin(), nums.end(), a) - nums.begin();
+            //int indb = vals[b].first; //find(nums.begin(), nums.end(), b) - nums.begin();
+            //if (vals[a].second == vals[b].second) return inda < indb;
             return vals[a].second < vals[b].second;
         });
         // for (auto it: vals){
