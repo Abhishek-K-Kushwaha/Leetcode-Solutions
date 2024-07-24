@@ -1,33 +1,36 @@
 class Solution {
 public:
-    vector<int> sortJumbled(vector<int>& mapping, vector<int>& nums) {
-        using int2 = pair<int,int>;
-        int n = nums.size();
-        vector<int2> vals(n); // {ind, val}
-        int ind = 0;
-        for (int num:nums){
-            int org = num;
-            if (org == 0){
-                vals[ind] = {mapping[0], ind};
-                ind++;
-                continue;
-            }
-            int val = 0;
-            int i = 1;
-            while(num){
-                int r = num % 10;
-                num /= 10;
-                val += mapping[r] * i;
-                i *= 10;
-            }
-            vals[ind] = {val, ind};
-            ind++;
+    using int2=array<int, 2>;
+    static int convert(int x, vector<int>& mapping){
+        if (x==0) return mapping[0];//  edge case
+        int z=0;
+        for(int pow10=1; x>0; pow10*=10){
+            auto [q, r]=div(x, 10);
+            z+=mapping[r]*pow10;
+            x=q;
         }
-        sort(vals.begin(), vals.end());
-        vector<int> ans;
-        for (auto& it: vals){
-            ans.push_back(nums[it.second]);
+        return z;
+    }
+
+    static vector<int> sortJumbled(vector<int>& mapping, vector<int>& nums) {
+        const int n=nums.size();
+        vector<int2> mapNum(n);
+        for(int i=0; i<n; i++){
+            int x=nums[i];
+            mapNum[i]={convert(x, mapping),i};//(mapping nums, idx)
         }
+        sort(mapNum.begin(), mapNum.end());// Use default sort is better
+        vector<int> ans(n);
+        for(int i=0; i<n; i++)
+            ans[i]=nums[mapNum[i][1]];
         return ans;
     }
 };
+
+
+auto init = []() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    cout.tie(nullptr);
+    return 'c';
+}();
