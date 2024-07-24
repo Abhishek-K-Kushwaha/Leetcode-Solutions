@@ -1,9 +1,9 @@
 class Solution {
 public:
     vector<int> sortJumbled(vector<int>& mapping, vector<int>& nums) {
-        using int2 = pair<int,int>;
+        //using int2 = pair<int,int>;
         int n = nums.size();
-        vector<int2> vals(n); // {ind, val}
+        vector<pair<int,int>> vals(n); // {ind, val}
         int ind = 0;
         for (int num:nums){
             int org = num;
