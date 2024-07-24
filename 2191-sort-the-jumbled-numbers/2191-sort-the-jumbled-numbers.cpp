@@ -1,9 +1,6 @@
 class Solution {
 public:
     vector<int> sortJumbled(vector<int>& mapping, vector<int>& nums) {
-        //vector<int> vals;
-        //vector<int> numscopy = nums;
-        //cout << nums.size() << " ";
         unordered_map<int, pair<int,int>> vals; // orgnum -> {ind, val}
         int ind = 0;
         for (int num:nums){
