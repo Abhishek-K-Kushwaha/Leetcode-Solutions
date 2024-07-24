@@ -1,29 +1,33 @@
 class Solution {
 public:
     vector<int> sortJumbled(vector<int>& mapping, vector<int>& nums) {
-        unordered_map<int, int> vals; // orgnum -> {ind, val}
+        using int2 = pair<int,int>;
+        int n = nums.size();
+        vector<int2> vals(n); // {ind, val}
+        int ind = 0;
         for (int num:nums){
             int org = num;
-            int val = 0;
-            int i = 1;
             if (org == 0){
-                vals[org] = mapping[0];
+                vals[ind] = {mapping[0], ind};
+                ind++;
                 continue;
             }
+            int val = 0;
+            int i = 1;
             while(num){
                 int r = num % 10;
                 num /= 10;
                 val += mapping[r] * i;
                 i *= 10;
             }
-            vals[org] = val;
+            vals[ind] = {val, ind};
+            ind++;
         }
-        sort(nums.begin(), nums.end(), [&](int a, int b){
-            return vals[a] < vals[b];
-        });
-        // for (auto it: vals){
-        //     cout << it << " ";
-        // }
-        return nums;
+        sort(vals.begin(), vals.end());
+        vector<int> ans;
+        for (auto& it: vals){
+            ans.push_back(nums[it.second]);
+        }
+        return ans;
     }
 };
