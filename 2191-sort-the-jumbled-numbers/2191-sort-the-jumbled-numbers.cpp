@@ -24,9 +24,11 @@ public:
             ind++;
         }
         sort(vals.begin(), vals.end());
-        vector<int> ans;
+        vector<int> ans(n);
+        ind = 0;
         for (auto& it: vals){
-            ans.push_back(nums[it.second]);
+            ans[ind] = (nums[it.second]);
+            ind++;
         }
         return ans;
     }
