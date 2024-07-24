@@ -3,7 +3,7 @@ using namespace std;
 
 class Solution {
 private:
-    vector<double> dp = vector<double>(33, 0);
+    vector<double> dp = vector<double>(32, 0);
     
     double f(double x, long long n) {
         if (n == 0) return 1;
