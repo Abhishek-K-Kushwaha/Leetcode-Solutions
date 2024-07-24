@@ -6,7 +6,7 @@ public:
         for (int num:nums){
             int org = num;
             int val = 0;
-            int i = 0;
+            int i = 1;
             if (org == 0){
                 vals[org] = {ind,(mapping[0])};
                 ind++;
@@ -15,8 +15,8 @@ public:
             while(num){
                 int r = num % 10;
                 num /= 10;
-                val += mapping[r] * pow(10,i);
-                i++;
+                val += mapping[r] * i;
+                i *= 10;
             }
             vals[org] = {ind, val};
             ind++;
