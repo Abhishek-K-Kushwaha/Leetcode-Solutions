@@ -14,18 +14,18 @@ public:
                 if(rating[j] > rating[i]){
                     leftgreater++;
                 }
-                if(rating[j] < rating[i]){
-                    leftsmaller++;
-                }
+                //if(rating[j] < rating[i]){
+                else   leftsmaller++;
+                //}
             }
 
             for(int j=i+1; j<n ; j++){
                 if(rating[j] > rating[i]){
                     rightgreater++;
                 }
-                if(rating[j] < rating[i]){
-                    rightsmaller++;
-                }
+                //if(rating[j] < rating[i]){
+                else    rightsmaller++;
+                //}
             }
 
             count += leftsmaller*rightgreater + leftgreater*rightsmaller;
