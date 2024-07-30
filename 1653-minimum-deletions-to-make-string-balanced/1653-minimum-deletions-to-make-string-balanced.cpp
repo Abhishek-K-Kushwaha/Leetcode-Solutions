@@ -2,18 +2,17 @@ class Solution {
 public:
     int minimumDeletions(string s) {
         int n = s.size();
-        int before = 0;
-        int after = 0;
-        for (auto& it: s){
-            if (it == 'a') after++;
+        int f[n + 1];
+        memset(f, 0, sizeof(f));
+        int b = 0;
+        for (int i = 1; i <= n; ++i) {
+            if (s[i - 1] == 'b') {
+                f[i] = f[i - 1];
+                ++b;
+            } else {
+                f[i] = min(f[i - 1] + 1, b);
+            }
         }
-        if (after == 0 || after == n) return 0;
-        int ans = after ;
-        for (int i = 0; i < n; i++){
-            if (s[i] == 'a') after--;
-            else before++;
-            ans = min(ans, before+after);
-        }
-        return ans;        
+        return f[n];
     }
 };
