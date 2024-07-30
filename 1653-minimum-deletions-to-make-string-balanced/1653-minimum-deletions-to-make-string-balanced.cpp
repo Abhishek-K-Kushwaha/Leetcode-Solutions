@@ -10,14 +10,9 @@ public:
         if (after == 0 || after == n) return 0;
         int ans = after ;
         for (int i = 0; i < n; i++){
-            if (s[i] == 'a'){
-                after--;
-                ans = min(ans, before+after);
-            }
-            else{
-                before++;
-                ans = min(ans, before+after);
-            }
+            if (s[i] == 'a') after--;
+            else before++;
+            ans = min(ans, before+after);
         }
         return ans;        
     }
