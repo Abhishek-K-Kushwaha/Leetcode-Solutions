@@ -4,7 +4,6 @@ public:
         int n = s.size();
         int before = 0;
         int after = 0;
-        //int ans = INT_MAX;
         for (auto& it: s){
             if (it == 'a') after++;
         }
