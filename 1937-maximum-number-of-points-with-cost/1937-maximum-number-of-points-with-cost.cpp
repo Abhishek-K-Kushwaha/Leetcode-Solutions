@@ -12,14 +12,11 @@ public:
             for (int c = 0; c < n; c++){
                 curr[c] = points[r][c] + max(maxscore, prev[c]);
                 maxscore = max(maxscore, prev[c]) - 1;
-                //cout << maxscore << " ";
             }
-            //cout << endl;
             maxscore = 0;
             for (int c = n-1; c >= 0; c--){
                 curr[c] = max(curr[c], points[r][c] + maxscore);
                 maxscore =  max(maxscore, prev[c]) - 1;
-                //cout << maxscore << " ";
             }
             prev = curr;
         }
