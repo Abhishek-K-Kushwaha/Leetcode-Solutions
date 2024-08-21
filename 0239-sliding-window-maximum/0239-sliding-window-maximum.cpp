@@ -1,24 +1,25 @@
 class Solution {
 public:
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
-        map<int,int> freq;
         int n = nums.size();
+        vector<int> ans(n-k+1, -1);
+        deque<int> dq;
         for (int i = 0; i < k; i++){
-            freq[nums[i]]++;
+            //if (dq.empty()) dq.push_back(nums[i]);
+            while (!dq.empty() && dq.back() < nums[i]){
+                dq.pop_back();
+            }
+            dq.push_back(nums[i]);
         }
-        vector<int> ans(n-k+1);
-        auto it = prev(freq.end());
-        ans[0] = it->first;
-        int ind = 1;
         for (int i = k; i < n; i++){
-            int to_remove = nums[i-k];
-            freq[to_remove]--;
-            if (freq[to_remove] == 0) freq.erase(to_remove);
-            freq[nums[i]]++;
-            it = prev(freq.end());
-            ans[ind] = it->first;
-            ind++;
+            ans[i-k] = dq.front();
+            if (nums[i-k] == dq.front()) dq.pop_front();
+            while (!dq.empty() && dq.back() < nums[i]){
+                dq.pop_back();
+            }
+            dq.push_back(nums[i]);
         }
-        return ans;
+        ans[n-k] = dq.front();
+        return ans;        
     }
 };
