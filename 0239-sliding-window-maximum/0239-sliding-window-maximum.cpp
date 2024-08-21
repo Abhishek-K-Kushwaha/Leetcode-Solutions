@@ -16,7 +16,7 @@ public:
             while (!dq.empty() && dq.back() < nums[i]){
                 dq.pop_back();
             }
-            dq.push_back(nums[i]);
+            if (dq.size() < k) dq.push_back(nums[i]);
         }
         ans[n-k] = dq.front();
         return ans;        
