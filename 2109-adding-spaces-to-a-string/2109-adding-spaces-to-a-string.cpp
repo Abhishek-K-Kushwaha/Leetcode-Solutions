@@ -7,10 +7,10 @@ public:
         int ind = 0;
         for (int i = 0; i < len; i++) {
             if (ind < num && i == spaces[ind]) {
-                ans += ' ';
+                ans.push_back(' ');
                 ind++;
             }
-            ans += s[i];
+            ans.push_back(s[i]);
         }
         return ans;
     }
