@@ -2,7 +2,6 @@ class Solution {
 public:
     bool canChange(string start, string target) {
         int len = start.size();
-        //char c1 = '_', c2 = '_';
         int i = 0, j = 0;
         while (i < len && j < len){
             while (i < len && start[i] == '_'){
@@ -22,9 +21,7 @@ public:
             }
             i++; j++;
         }
-        cout << i<< "done"<< j;
         while (i < len){
-            //cout<< i << " ";
             if (start[i] != '_') return false;
             i++;
         }
