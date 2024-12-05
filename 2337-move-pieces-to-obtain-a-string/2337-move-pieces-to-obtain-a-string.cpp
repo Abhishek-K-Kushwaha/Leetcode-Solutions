@@ -14,7 +14,7 @@ public:
                 return false;
             if (j < len && i >= len)
                 return false;
-            if (i < len && j < len) {
+            //if (i < len && j < len) {
                 if (start[i] != target[j])
                     return false;
                 else {
@@ -23,7 +23,7 @@ public:
                     else if (start[i] == 'R' && j < i)
                         return false;
                 }
-            }
+            //}
             i++;
             j++;
         }
