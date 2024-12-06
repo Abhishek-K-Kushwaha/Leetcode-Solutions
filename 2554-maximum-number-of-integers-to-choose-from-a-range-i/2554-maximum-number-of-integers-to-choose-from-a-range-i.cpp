@@ -1,7 +1,8 @@
 class Solution {
 public:
     int maxCount(vector<int>& banned, int n, int maxSum) {
-        unordered_map<int,bool> ban;
+        //unordered_map<int,bool> ban;
+        vector<bool> ban(10000, 0);
         for (auto i:banned){
             ban[i] = 1;
         }
