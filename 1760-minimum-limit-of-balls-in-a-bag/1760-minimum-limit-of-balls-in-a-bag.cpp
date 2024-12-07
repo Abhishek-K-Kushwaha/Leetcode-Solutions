@@ -20,6 +20,6 @@ public:
             if (f(m, nums, n+maxOperations)) r = m;
             else l = m + 1;
         }
-        return l;
+        return r;
     }
 };
