@@ -10,10 +10,10 @@ public:
             m = postmax[i];
         }
         int ans = m, val, end, ind;
+        vector<int> temp(3, 0);
         for (int i = 0; i < n; i++) {
             val = events[i][2];
             end = events[i][1];
-            vector<int> temp(3, 0);
             temp[0] = end + 1;
             auto it = lower_bound(events.begin(), events.end(), temp);
             ind = (it - events.begin());
