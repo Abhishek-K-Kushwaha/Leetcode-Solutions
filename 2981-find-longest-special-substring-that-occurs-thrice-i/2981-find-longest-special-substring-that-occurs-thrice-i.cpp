@@ -22,7 +22,7 @@ public:
                     while (k < n && s[i] != s[k]){
                         k++;
                     }
-                    cout << i << j << k << endl;
+                    //cout << i << j << k << endl;
                     if (k == n) break;
                     int cnt = 0;
                     while (k < n && s[i] == s[j] && s[i] == s[k]){
