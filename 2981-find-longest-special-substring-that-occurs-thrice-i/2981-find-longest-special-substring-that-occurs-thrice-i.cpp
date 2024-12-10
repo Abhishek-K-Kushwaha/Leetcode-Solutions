@@ -9,15 +9,16 @@ public:
             int temp = -1;
             for (int y = x+1; y < n; y++){
                 j = y;
-                if (y <= temp) continue;
+                //if (y <= temp) continue;
                 while (j < n && s[i] != s[j]){
                     j++;
                 }
                 if (j == n) break;
+                y = j;
                 temp = j;
                 int temp2 = -1;
                 for (int z = temp+1; z <n; z++){
-                    if (z<= temp2) continue;
+                    //if (z<= temp2) continue;
                     k = z;
                     j = temp;
                     i = x;
@@ -26,6 +27,7 @@ public:
                     }
                     //cout << i << j << k << endl;
                     if (k == n) break;
+                    z = k;
                     temp2 = k;
                     int cnt = 0;
                     while (k < n && s[i] == s[j] && s[i] == s[k]){
