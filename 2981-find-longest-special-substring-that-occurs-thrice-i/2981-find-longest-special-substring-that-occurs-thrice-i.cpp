@@ -2,25 +2,19 @@ class Solution {
 public:
     int maximumLength(string s) {
         int n = s.size();
-        int i, j, k, ans = 0;
-        //int temp = -1;
+        int i, j, k, temp, ans = 0;
         for (int x = 0; x < n; x++){
             i = x;  
-            int temp = -1;
             for (int y = x+1; y < n; y++){
                 j = y;
-                //if (y <= temp) continue;
                 while (j < n && s[i] != s[j]){
                     j++;
                 }
                 if (j == n) break;
                 y = j;
-                temp = j;
-                int temp2 = -1;
-                for (int z = temp+1; z <n; z++){
-                    //if (z<= temp2) continue;
+                for (int z = y+1; z <n; z++){
                     k = z;
-                    j = temp;
+                    j = y;
                     i = x;
                     while (k < n && s[i] != s[k]){
                         k++;
@@ -28,7 +22,6 @@ public:
                     //cout << i << j << k << endl;
                     if (k == n) break;
                     z = k;
-                    temp2 = k;
                     int cnt = 0;
                     while (k < n && s[i] == s[j] && s[i] == s[k]){
                         cnt++; i++; j++; k++;
