@@ -2,35 +2,30 @@ class Solution {
 public:
     int maximumLength(string s) {
         int n = s.size();
-        int i, j, k, ans = 0;
-        for (int x = 0; x < n; x++){
-            i = x;  
-            for (int y = x+1; y < n; y++){
-                while (y < n && s[i] != s[y]){
-                    y++;
-                }
-                if (y == n) break;
-                j = y;
-                for (int z = y+1; z < n; z++){
-                    j = y;
-                    i = x;
-                    while (z < n && s[i] != s[z]){
-                        z++;
-                    }
-                    //cout << i << j << k << endl;
-                    if (z == n) break;
-                    k = z;
-                    int cnt = 0;
-                    while (k < n && s[i] == s[j] && s[i] == s[k]){
-                        cnt++; i++; j++; k++;
-                        if (s[i-1] != s[i]) break;
-                    }
-                    ans = max(ans, cnt);
-                    //cout<< cnt << endl;
-                }
-            }
+        int l = 1, r = n;
+
+        if (!helper(s, n, l)) return -1;
+
+        while (l + 1 < r) {
+            int mid = (l + r) / 2;
+            if (helper(s, n, mid)) l = mid;
+            else r = mid;
         }
-        if (ans) return ans;
-        else return -1;
+
+        return l;
+    }
+
+private:
+    bool helper(const string& s, int n, int x) {
+        vector<int> cnt(26, 0);
+        int p = 0;
+
+        for (int i = 0; i < n; i++) {
+            while (s[p] != s[i]) p++;
+            if (i - p + 1 >= x) cnt[s[i] - 'a']++;
+            if (cnt[s[i] - 'a'] > 2) return true;
+        }
+
+        return false;
     }
 };
