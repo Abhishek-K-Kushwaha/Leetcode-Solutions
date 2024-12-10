@@ -2,7 +2,7 @@ class Solution {
 public:
     int maximumLength(string s) {
         int n = s.size();
-        int i, j, k, temp, ans = 0;
+        int i, j, k, ans = 0;
         for (int x = 0; x < n; x++){
             i = x;  
             for (int y = x+1; y < n; y++){
