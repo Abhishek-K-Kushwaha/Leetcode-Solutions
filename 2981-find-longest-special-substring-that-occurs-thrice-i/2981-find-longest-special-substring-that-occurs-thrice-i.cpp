@@ -6,22 +6,24 @@ public:
         for (int x = 0; x < n; x++){
             i = x;  
             for (int y = x+1; y < n; y++){
-                j = y;
-                while (j < n && s[i] != s[j]){
-                    j++;
+                //j = y;
+                while (y < n && s[i] != s[y]){
+                    y++;
                 }
-                if (j == n) break;
-                y = j;
-                for (int z = y+1; z <n; z++){
-                    k = z;
+                if (y == n) break;
+                //y = j;
+                j = y;
+                for (int z = y+1; z < n; z++){
+                    //k = z;
                     j = y;
                     i = x;
-                    while (k < n && s[i] != s[k]){
-                        k++;
+                    while (z < n && s[i] != s[z]){
+                        z++;
                     }
                     //cout << i << j << k << endl;
-                    if (k == n) break;
-                    z = k;
+                    if (z == n) break;
+                    //z = k;
+                    k = z;
                     int cnt = 0;
                     while (k < n && s[i] == s[j] && s[i] == s[k]){
                         cnt++; i++; j++; k++;
