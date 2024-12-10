@@ -15,7 +15,9 @@ public:
                 }
                 if (j == n) break;
                 temp = j;
+                int temp2 = -1;
                 for (int z = temp+1; z <n; z++){
+                    if (z<= temp2) continue;
                     k = z;
                     j = temp;
                     i = x;
@@ -24,6 +26,7 @@ public:
                     }
                     //cout << i << j << k << endl;
                     if (k == n) break;
+                    temp2 = k;
                     int cnt = 0;
                     while (k < n && s[i] == s[j] && s[i] == s[k]){
                         cnt++; i++; j++; k++;
