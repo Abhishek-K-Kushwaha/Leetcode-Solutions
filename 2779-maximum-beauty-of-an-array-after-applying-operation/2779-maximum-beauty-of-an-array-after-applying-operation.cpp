@@ -1,20 +1,21 @@
 class Solution {
 public:
-    int maximumBeauty(vector<int>& nums, int k) {
-        int n = nums.size();
-        sort(nums.begin(), nums.end());
-        int l = 1, r = n, mid;
-        while (l < r) {
-            mid = (l + r + 1) / 2;
-            for (int i = mid - 1; i < n; i++) {
-                if (nums[i] - nums[i - mid + 1] <= 2 * k) {
-                    l = mid;
-                    break;
-                }
+    static int maximumBeauty(vector<int>& nums, int k) {
+        auto [xMin, xMax]=minmax_element(nums.begin(), nums.end());
+        const int a=*xMin, N=*xMax-a;
+        vector<int> freq(N+1, 0);
+        for(int x: nums)
+            freq[x-a]++;
+        
+        int cnt=0, maxCnt=0;
+        for(int l=0, r=0; r<=N; r++){
+            cnt+=freq[r];
+            if (r-l>2*k){
+                cnt-=freq[l];
+                l++;
             }
-            if (l != mid)
-                r = mid - 1;
+            maxCnt=max(maxCnt, cnt);
         }
-        return l;
+        return maxCnt;
     }
 };
