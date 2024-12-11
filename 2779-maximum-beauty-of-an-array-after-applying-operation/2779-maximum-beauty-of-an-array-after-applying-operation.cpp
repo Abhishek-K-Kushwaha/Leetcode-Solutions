@@ -4,7 +4,7 @@ public:
         auto [xMin, xMax]=minmax_element(nums.begin(), nums.end());
         const int a=*xMin, N=*xMax-a;
         //vector<int> freq(N+1, 0);
-        unordered_map<int,int> freq(N+1);
+        unordered_map<int,int> freq;
         for(int x: nums)
             freq[x-a]++;
         
