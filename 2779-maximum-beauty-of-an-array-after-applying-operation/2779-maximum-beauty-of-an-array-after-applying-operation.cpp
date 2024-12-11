@@ -3,7 +3,8 @@ public:
     static int maximumBeauty(vector<int>& nums, int k) {
         auto [xMin, xMax]=minmax_element(nums.begin(), nums.end());
         const int a=*xMin, N=*xMax-a;
-        vector<int> freq(N+1, 0);
+        //vector<int> freq(N+1, 0);
+        unordered_map<int,int> freq(N+1);
         for(int x: nums)
             freq[x-a]++;
         
