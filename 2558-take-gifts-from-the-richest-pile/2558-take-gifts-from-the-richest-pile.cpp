@@ -2,7 +2,7 @@ class Solution {
 public:
     long long pickGifts(vector<int>& gifts, int k) {
         priority_queue<int> pq;
-        int ans = 0;
+        long long ans = 0;
         for (int i : gifts) {
             ans += i;
             pq.push(i);
