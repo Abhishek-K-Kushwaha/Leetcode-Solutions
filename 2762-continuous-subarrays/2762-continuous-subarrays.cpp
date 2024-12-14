@@ -8,8 +8,8 @@ public:
         while (r < n){
             //cout << l << " " << r << endl;
             while (r < n && (st.empty() || abs(nums[r]-*st.begin())<=2 && abs(nums[r]-*st.rbegin())<=2)){
-                st.insert(nums[r]);
-                r++;
+                st.insert(nums[r++]);
+                //r++;
                 // cout << "r= " <<r << endl;
             }
             len = r - l;
