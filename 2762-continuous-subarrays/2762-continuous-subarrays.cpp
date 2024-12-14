@@ -16,13 +16,13 @@ public:
             ans += ((long long)len*(len-1))/2;
             // cout << ans << " ans" << endl;
             while (l<r && r<n && ((abs(nums[r]-*st.begin())>2) || (abs(nums[r]-*st.rbegin())>2))){
-                auto it = st.find(nums[l]);
+                auto it = st.find(nums[l++]);
                 //cout << "To be del " << *it<< endl;
                 st.erase(it);
                 // for (auto i: st){
                 //     cout << i << " ";
                 // }
-                l++;
+                //l++;
                 //cout << endl << "l = " << l << endl;
             }
             // if (r<n) st.insert(nums[r]);
