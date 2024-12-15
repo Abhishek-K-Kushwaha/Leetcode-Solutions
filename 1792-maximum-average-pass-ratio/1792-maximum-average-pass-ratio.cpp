@@ -1,9 +1,9 @@
 class Solution {
 public:
-    double f(double a, double b){
-        double ans = ((a+1)/(b+1)-(a/b));
-        return ans;
+    double f(int a, int b) {
+        return (double)(a + 1) / (b + 1) - (double)a / b;
     }
+    
     double maxAverageRatio(vector<vector<int>>& classes, int ext) {
         priority_queue<vector<double>> pq;
         int n = classes.size();
