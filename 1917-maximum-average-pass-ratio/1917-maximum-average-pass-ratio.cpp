@@ -5,7 +5,7 @@ public:
     }
 
     double maxAverageRatio(vector<vector<int>>& classes, int ext) {
-        priority_queue<vector<double>> pq;
+        priority_queue<pair<double, double>> pq;
         int n = classes.size();
         int ind = 0;
         for (auto it:classes){
@@ -15,7 +15,7 @@ public:
         for (int i = 0; i < ext; i++){
             auto it = pq.top();
             pq.pop();
-            ind = it[1];
+            ind = it.second;
             classes[ind][0]++; classes[ind][1]++;
             pq.push({f(classes[ind][0],classes[ind][1]),(double)ind});
         }
