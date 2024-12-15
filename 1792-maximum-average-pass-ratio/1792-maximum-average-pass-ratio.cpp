@@ -1,40 +1,40 @@
 class Solution {
 public:
-    double f(int a, int b) {
-        return (double)(a + 1) / (b + 1) - (double)a / b;
+    double f(double a, double b){
+        double ans = ((a+1)/(b+1)-(a/b));
+        return ans;
     }
-
     double maxAverageRatio(vector<vector<int>>& classes, int ext) {
-        // Max heap to store {improvement, index}
-        auto cmp = [](const pair<double, int>& a, const pair<double, int>& b) {
-            return a.first < b.first; // Max heap
-        };
-        priority_queue<pair<double, int>, vector<pair<double, int>>, decltype(cmp)> pq(cmp);
-
-        // Initialize the priority queue with the improvements
-        for (int i = 0; i < classes.size(); ++i) {
-            pq.push({f(classes[i][0], classes[i][1]), i});
+        priority_queue<vector<double>> pq;
+        int n = classes.size();
+        int ind = 0;
+        for (auto it:classes){
+            pq.push({f(it[0], it[1]), (double)ind});
+            ind++;
         }
-
-        // Allocate extra students
-        for (int i = 0; i < ext; ++i) {
-            auto [maxImprovement, idx] = pq.top();
+        // while (!pq.empty()){
+        //     auto it = pq.top();
+        //     pq.pop();
+        //     cout<< it[0] << " " <<it[1]<<" "<<it[2]<<endl;
+        //     //ans += (it[1]/it[2]);
+        // }
+        for (int i = 0; i < ext; i++){
+            auto it = pq.top();
             pq.pop();
-
-            // Increment the class stats
-            classes[idx][0]++;
-            classes[idx][1]++;
-
-            // Push the updated improvement back to the heap
-            pq.push({f(classes[idx][0], classes[idx][1]), idx});
+            ind = it[1];
+            //double deno = it[2] + 1;
+            classes[ind][0]++; classes[ind][1]++;
+            pq.push({f(classes[ind][0],classes[ind][1]),(double)ind});
         }
-
-        // Calculate the final average ratio
-        double totalRatio = 0.0;
-        for (const auto& cls : classes) {
-            totalRatio += (double)cls[0] / cls[1];
+        double ans = 0;
+        // while (!pq.empty()){
+        //     auto it = pq.top();
+        //     pq.pop();
+        //     ans += (it[1]/it[2]);
+        // }
+        for (auto it: classes){
+            ans += ((double)it[0]/it[1]);
         }
-
-        return totalRatio / classes.size();
+        return ans/n;
     }
 };
