@@ -5,17 +5,12 @@ public:
         for (auto it:s){
             freq[it-'a']++;
         }
-        // for (auto i:freq){
-        //     cout << i << " ";
-        // }
-        //cout << endl;
         int r = 25, l = r - 1, cnt = 0;
         string ans;
         while (r >= 0){
             while (r >= 0 && !freq[r]){
                 r--;
             }
-            //cout << r << endl;
             if (r < 0) break;
             cnt = 0;
             while (freq[r] > 0 && cnt < lim){
@@ -36,7 +31,6 @@ public:
                 freq[l]--;
             }
             else break;
-            //cout << ans << endl;
         }
         return ans;
     }
