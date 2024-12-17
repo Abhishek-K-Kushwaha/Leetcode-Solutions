@@ -1,43 +1,38 @@
 class Solution {
 public:
-    string repeatLimitedString(string s, int repeatLimit) {
-        unordered_map<char, int> freq;
-        for (char ch : s) {
-            freq[ch]++;
+    string repeatLimitedString(string s, int lim) {
+        vector<int> freq(26, 0);
+        for (auto it : s) {
+            freq[it - 'a']++;
         }
-
-        priority_queue<char> maxHeap;
-        for (auto& [ch, count] : freq) {
-            maxHeap.push(ch);
-        }
-
-        string result;
-
-        while (!maxHeap.empty()) {
-            char ch = maxHeap.top();
-            maxHeap.pop();
-            int count = freq[ch];
-
-            int use = min(count, repeatLimit);
-            result.append(use, ch);
-
-            freq[ch] -= use;
-
-            if (freq[ch] > 0 && !maxHeap.empty()) {
-                char nextCh = maxHeap.top();
-                maxHeap.pop();
-
-                result.push_back(nextCh);
-                freq[nextCh]--;
-
-                if (freq[nextCh] > 0) {
-                    maxHeap.push(nextCh);
-                }
-
-                maxHeap.push(ch);
+        int r = 25, l = r - 1, cnt = 0;
+        string ans;
+        while (r >= 0) {
+            while (r >= 0 && !freq[r]) {
+                r--;
             }
+            if (r < 0)
+                break;
+            cnt = 0;
+            while (freq[r] > 0 && cnt < lim) {
+                ans.push_back('a' + r);
+                cnt++;
+                freq[r]--;
+            }
+            if (freq[r] == 0) {
+                r--;
+                continue;
+            }
+            l = r - 1;
+            while (l >= 0 && !freq[l]) {
+                l--;
+            }
+            if (l >= 0) {
+                ans.push_back('a' + l);
+                freq[l]--;
+            } else
+                break;
         }
-
-        return result;
+        return ans;
     }
 };
