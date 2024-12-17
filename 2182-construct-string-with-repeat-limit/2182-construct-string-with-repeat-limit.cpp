@@ -1,43 +1,38 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
-using namespace std;
-
 class Solution {
 public:
-    string repeatLimitedString(string s, int repeatLimit) {
-        sort(s.rbegin(), s.rend());
-
-        string result;
-        int freq = 1;
-        int pointer = 0;
-
-        for (int i = 0; i < s.size(); ++i) {
-            if (!result.empty() && result.back() == s[i]) {
-                if (freq < repeatLimit) {
-                    result += s[i];
-                    freq++;
-                } else {
-                    pointer = max(pointer, i + 1);
-                    while (pointer < s.size() && s[pointer] == s[i]) {
-                        pointer++;
-                    }
-
-                    if (pointer < s.size()) {
-                        result += s[pointer];
-                        swap(s[i], s[pointer]);
-                        freq = 1;
-                    } else {
-                        break;
-                    }
-                }
-            } else {
-                result += s[i];
-                freq = 1;
-            }
+    string repeatLimitedString(string s, int lim) {
+        vector<int> freq(26, 0);
+        for (auto it : s) {
+            freq[it - 'a']++;
         }
-
-        return result;
+        int r = 25, l = r - 1, cnt = 0;
+        string ans;
+        while (r >= 0) {
+            while (r >= 0 && !freq[r]) {
+                r--;
+            }
+            if (r < 0)
+                break;
+            cnt = 0;
+            while (freq[r] > 0 && cnt < lim) {
+                ans.push_back('a' + r);
+                cnt++;
+                freq[r]--;
+            }
+            if (freq[r] == 0) {
+                r--;
+                continue;
+            }
+            l = r - 1;
+            while (l >= 0 && !freq[l]) {
+                l--;
+            }
+            if (l >= 0) {
+                ans.push_back('a' + l);
+                freq[l]--;
+            } else
+                break;
+        }
+        return ans;
     }
 };
