@@ -10,6 +10,7 @@ public:
             else if (stk.top().first > i){
                 maxi = stk.top().second;
                 mini = i;
+                stk.pop();
                 while (!stk.empty() && stk.top().second > i){
                     mini = min(mini, stk.top().first);
                     stk.pop();
