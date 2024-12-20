@@ -9,9 +9,9 @@ public:
             n /= 10;
             i++;
         }
-        int ans = (m-1)/10 + 1;
-        //cout << ans<< endl;
-        for (int i = 1; i < 10; i++){
+        //int ans = (m-1)/10 + 1;
+        int ans = 0;
+        for (int i = 0; i < 10; i++){
             long long div = pow(10, i+1);
             ans +=  m/div * pow(10,i);
             if (nums[i] >= 2){
