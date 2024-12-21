@@ -18,9 +18,9 @@ public:
             adj[it[0]].emplace_back(it[1]);
             adj[it[1]].emplace_back(it[0]);
         }
-        for (int i = 0; i < val.size(); i++){
-            val[i] %= k;
-        }
+        // for (int i = 0; i < val.size(); i++){
+        //     val[i] %= k;
+        // }
         return dfs(0, -1, adj, val, k);
     }
 };
