@@ -10,11 +10,6 @@ public:
         int rem = val[node] % k;
         if (rem) val[parent] += rem;
         else ans++;
-        //cout<< node << " ";
-        // for (int i:val){
-        //     cout<< i << " ";
-        // }
-        //cout<< endl << ans << endl;
         return ans;
     }
     int maxKDivisibleComponents(int n, vector<vector<int>>& edges, vector<int>& val, int k) {
