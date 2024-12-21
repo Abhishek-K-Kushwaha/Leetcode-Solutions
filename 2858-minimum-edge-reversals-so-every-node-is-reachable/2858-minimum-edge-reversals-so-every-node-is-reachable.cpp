@@ -2,7 +2,7 @@ class Solution {
 public:
     vector<int> minEdgeReversals(int n, vector<vector<int>>& edges) {
         // Build adjacency list with edge directions
-        vector<vector<pair<int,int>>> adj(n);
+        vector<vector<pair<int,bool>>> adj(n);
         for (const auto& edge : edges) {
             adj[edge[0]].emplace_back(edge[1], 0);  // 0 for forward edge
             adj[edge[1]].emplace_back(edge[0], 1);  // 1 for reverse edge
@@ -21,7 +21,7 @@ public:
     }
     
 private:
-    int dfs1(int node, int parent, const vector<vector<pair<int,int>>>& adj) {
+    int dfs1(int node, int parent, const vector<vector<pair<int,bool>>>& adj) {
         int reversals = 0;
         for (const auto& [next, isReverse] : adj[node]) {
             if (next != parent) {
@@ -31,7 +31,7 @@ private:
         return reversals;
     }
     
-    void dfs2(int node, int parent, int parentCost, const vector<vector<pair<int,int>>>& adj, vector<int>& result) {
+    void dfs2(int node, int parent, int parentCost, const vector<vector<pair<int,bool>>>& adj, vector<int>& result) {
         for (const auto& [next, isReverse] : adj[node]) {
             if (next != parent) {
                 // If edge was forward (0), it becomes reverse (1) when changing root
