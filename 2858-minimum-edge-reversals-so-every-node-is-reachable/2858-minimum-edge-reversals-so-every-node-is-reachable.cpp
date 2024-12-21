@@ -1,27 +1,31 @@
 class Solution {
 public:
     int to, away, ans;
-    bool dfs(int node, vector<vector<pair<int,bool>>>& adj, int parent, vector<int>& res){
-        if (res[node] != -1){
-            ans = res[node] + to - away;
-            return true;
+    void dfs2(int node, vector<vector<pair<int,bool>>>& adj, vector<int>& res){
+        for (auto [nxt,sign]:adj[node]){
+            if (res[nxt] == -1){
+                // if (!sign) to++;
+                // else away++;
+                to += (!sign);
+                away += sign;
+                res[nxt] = res[0]+away-to;
+                dfs2(nxt, adj, res);
+                // if (!sign) to--;
+                // else away--;
+                to -= (!sign);
+                away -= sign;
+            }
         }
+    }
+    void dfs(int node, vector<vector<pair<int,bool>>>& adj, int parent){
         for (auto [nxt,sign]:adj[node]){
             if (nxt != parent){
                 if (!sign) {
                     to++;
                 }
-                else{
-                    away++;
-                }
-                if (dfs(nxt, adj, node, res)) return true;
-                if (res[0] != -1 ){ 
-                    if (!sign) to--;
-                    else away--;
-                }
+                dfs(nxt, adj, node);
             }
         }
-        return false;
     }
     vector<int> minEdgeReversals(int n, vector<vector<int>>& edges) {
         vector<vector<pair<int,bool>>> adj(n);
@@ -32,12 +36,11 @@ public:
             adj[b].push_back({a,0});
         }
         vector<int> res(n, -1);
-        for (int i = 0; i < n; i++){
-            ans = 0;
-            to = 0, away = 0;
-            if (dfs(i, adj, -1, res)) res[i] = ans;
-            else res[i] = to;
-        }
+        to =  0;
+        dfs(0, adj, -1);
+        res[0] = to;
+        to = 0, away = 0;
+        dfs2(0, adj, res);
         return res;
     }
 };
