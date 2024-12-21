@@ -1,24 +1,19 @@
 class Solution {
 public:
-    void dfs(int node, vector<vector<pair<int, bool>>>& adj, int& ans,
-             int parent) {
-        for (auto& [nxt, sign] : adj[node]) {
-            if (nxt != parent) {
-                ans += sign;
-                dfs(nxt, adj, ans, node);
-            }
-        }
+    int dfs(vector<vector<int>> &al, vector<bool> &visited, int from) {
+        auto change = 0;
+        visited[from] = true;
+        for (auto to : al[from])
+            if (!visited[abs(to)])
+                change += dfs(al, visited, abs(to)) + (to > 0);
+        return change;        
     }
-    int minReorder(int n, vector<vector<int>>& edges) {
-        vector<vector<pair<int, bool>>> adj(n);
-        int a, b;
-        for (auto it : edges) {
-            a = it[0], b = it[1];
-            adj[a].push_back({b, 1});
-            adj[b].push_back({a, 0});
+    int minReorder(int n, vector<vector<int>>& connections) {
+        vector<vector<int>> al(n);
+        for (auto &c : connections) {
+            al[c[0]].push_back(c[1]);
+            al[c[1]].push_back(-c[0]);
         }
-        int ans = 0;
-        dfs(0, adj, ans, -1);
-        return ans;
+        return dfs(al, vector<bool>(n) = {}, 0);
     }
 };
