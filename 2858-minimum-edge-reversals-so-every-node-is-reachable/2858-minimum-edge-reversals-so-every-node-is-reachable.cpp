@@ -15,7 +15,10 @@ public:
                     away++;
                 }
                 if (dfs(nxt, adj, node, res)) return true;
-                if (res[0] != -1) to = 0, away = 0;
+                if (res[0] != -1 ){ 
+                    if (!sign) to--;
+                    else away--;
+                }
             }
         }
         return false;
