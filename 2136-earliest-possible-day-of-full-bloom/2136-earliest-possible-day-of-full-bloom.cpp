@@ -12,8 +12,8 @@ public:
         int tot = 0;
         int cur = 0;
         for (int i = 0; i < n; i++) {
-            tot = max(tot, cur + times[i].second - times[i].first);
             cur += times[i].second;
+            tot = max(tot, cur - times[i].first);
         }
         return tot;
     }
