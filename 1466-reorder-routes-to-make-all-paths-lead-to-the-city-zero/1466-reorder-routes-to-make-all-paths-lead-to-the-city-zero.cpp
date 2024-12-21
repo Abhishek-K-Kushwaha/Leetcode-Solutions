@@ -1,11 +1,11 @@
 class Solution {
 public:
-    int dfs(vector<vector<int>> &al, vector<bool> &visited, int from) {
+    int dfs(vector<vector<int>> &al, int parent, int from) {
         auto change = 0;
-        visited[from] = true;
+        //visited[from] = true;
         for (auto to : al[from])
-            if (!visited[abs(to)])
-                change += dfs(al, visited, abs(to)) + (to > 0);
+            if (abs(to) != parent)
+                change += dfs(al, abs(from), abs(to)) + (to > 0);
         return change;        
     }
     int minReorder(int n, vector<vector<int>>& connections) {
@@ -14,6 +14,6 @@ public:
             al[c[0]].push_back(c[1]);
             al[c[1]].push_back(-c[0]);
         }
-        return dfs(al, vector<bool>(n) = {}, 0);
+        return dfs(al, -1, 0);
     }
 };
