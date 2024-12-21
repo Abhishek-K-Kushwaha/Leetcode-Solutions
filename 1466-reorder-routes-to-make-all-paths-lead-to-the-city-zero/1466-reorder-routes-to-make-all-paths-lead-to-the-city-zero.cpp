@@ -19,12 +19,7 @@ public:
             adj[b].push_back(a);
         }
         int ans = 0;
-        //vector<int> res(n);
-        //for (int i = 0; i < n; i++){
-            //ans = 0;
         dfs(0, adj, edges, st, ans, -1);
-            //res[i] = ans;
-        //}
         return ans;
     }
 };
