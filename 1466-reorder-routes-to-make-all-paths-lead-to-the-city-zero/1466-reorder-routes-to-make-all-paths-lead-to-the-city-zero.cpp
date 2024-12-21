@@ -1,25 +1,25 @@
 class Solution {
 public:
-    void dfs(int node, vector<vector<int>>& adj, vector<vector<int>>& edges, set<pair<int,int>>& st, int& ans, int parent){
-        for (int nxt:adj[node]){
+    void dfs(int node, vector<vector<pair<int,bool>>>& adj, int& ans, int parent){
+        for (auto& [nxt,sign]:adj[node]){
+            //int nxt = it.first;
+            //bool sign = it.second;
             if (nxt != parent){
-                if (st.find({node, nxt}) != st.end()) ans++;
-                dfs(nxt, adj, edges, st, ans, node);
+                ans += sign;
+                dfs(nxt, adj, ans, node);
             }
         }
     }
     int minReorder(int n, vector<vector<int>>& edges) {
-        vector<vector<int>> adj(n);
-        set<pair<int,int>> st;
+        vector<vector<pair<int,bool>>> adj(n);
         int a, b;
         for (auto it: edges){
             a = it[0], b = it[1];
-            st.insert({a,b});
-            adj[a].push_back(b);
-            adj[b].push_back(a);
+            adj[a].push_back({b,1});
+            adj[b].push_back({a,0});
         }
         int ans = 0;
-        dfs(0, adj, edges, st, ans, -1);
+        dfs(0, adj, ans, -1);
         return ans;
     }
 };
