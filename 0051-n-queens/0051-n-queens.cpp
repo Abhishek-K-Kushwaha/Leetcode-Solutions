@@ -4,7 +4,7 @@ public:
     void put(int r, int n, vector<bool>& c, vector<bool>& d,
              vector<bool>& invd, vector<string>& temp) {
         if (r == n) {
-            ans.push_back(temp);
+            ans.emplace_back(temp);
             return;
         }
         for (int i = 0; i < n; i++) {
