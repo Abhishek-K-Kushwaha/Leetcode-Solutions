@@ -29,7 +29,6 @@ public:
             sort(arr.begin(), arr.end());
             for (int i = 0; i < n; i++){
                 if (!vis[i]){
-                    //int cnt = 0;
                     vis[i] = 1;
                     int ind = i;
                     while (!vis[arr[ind].second]){
@@ -37,7 +36,6 @@ public:
                         vis[arr[ind].second] = 1;
                         ind = arr[ind].second;
                     }
-                    //ans += cnt;
                 }
             }
         }
