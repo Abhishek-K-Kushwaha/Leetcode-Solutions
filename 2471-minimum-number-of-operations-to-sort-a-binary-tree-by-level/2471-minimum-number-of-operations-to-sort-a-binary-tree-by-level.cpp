@@ -19,7 +19,7 @@ public:
         while (!q.empty()) {
             int n = q.size();
             vector<pair<int, int>> arr(n);
-            vector<int> vis(n, 0);
+            vector<bool> vis(n, 0);
             for (int i = 0; i < n; i++) {
                 TreeNode* node = q.front();
                 q.pop();
