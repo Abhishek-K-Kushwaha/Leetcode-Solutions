@@ -12,64 +12,35 @@
 class Solution {
 public:
     int i = 0;
-    int dfs(string& s, int lvl, TreeNode* par){
+    int dfs(string& s, int lvl, TreeNode* par, bool isright){
         string temp;
         while(i < s.size() && s[i] != '-'){
             temp.push_back(s[i]);
             i++;
         }
         int n = stoi(temp);
-        //cout<<n<<endl;
+        cout<< n << " "<<lvl<<" "<< isright<< endl;
         TreeNode* node = new TreeNode(n);
-        par->left = node;
+        if (!isright) par->left = node;
+        else par->right = node;
         if (i >= s.size()) return -1;
         int cnt = 0;
         while (s[i]=='-'){
             cnt++;
             i++;
         }
+        //if (cnt < lvl) return cnt;
+        if (cnt == lvl){
+            cnt = dfs(s, lvl, par, 1);
+        }
         if (cnt < lvl) return cnt;
-        else if (cnt == lvl){
-            string tempr;
-            while(i < s.size() && s[i] != '-'){
-                tempr.push_back(s[i]);
-                i++;
-            }
-            n = stoi(tempr);
-            TreeNode* noder = new TreeNode(n);
-            par->right = noder;
-            if (i >= s.size()) return -1;
-            cnt = 0;
-            while (s[i]=='-'){
-                cnt++;
-                i++;
-            }
-            if (cnt > lvl) return dfs(s, lvl+1, noder);
-            else return cnt;
+        cnt = dfs(s, lvl+1, node, 0);
+        if (cnt == lvl){
+            return dfs(s, lvl, par, 1);
         }
-        int z = dfs(s, lvl+1, node);
-        if (z == lvl){
-            string tempr;
-            while(i < s.size() && s[i] != '-'){
-                tempr.push_back(s[i]);
-                i++;
-            }
-            n = stoi(tempr);
-            TreeNode* noder = new TreeNode(n);
-            par->right = noder;
-            if (i >= s.size()) return -1;
-            cnt = 0;
-            while (s[i]=='-'){
-                cnt++;
-                i++;
-            }
-            if (cnt > lvl) return dfs(s, lvl+1, noder);
-            else return cnt;
-        }
-        else return z;
-
-
+        else return cnt;
     }
+
     TreeNode* recoverFromPreorder(string s) {
         string temp;
         while(i < s.size() && s[i] != '-'){
@@ -77,11 +48,10 @@ public:
             i++;
         }
         int n = stoi(temp);
-        //cout<<n<<endl;
         TreeNode* root = new TreeNode(n);
         if (i < s.size()) {
             i++;
-            dfs(s, 1, root);
+            dfs(s, 1, root, 0);
         }
         return root;
     }
