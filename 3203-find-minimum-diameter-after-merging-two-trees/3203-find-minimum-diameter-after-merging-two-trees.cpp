@@ -13,7 +13,6 @@ public:
                 maxd = max(maxd, temp);
             }
         }
-        //dia = max(dia, d);
         return maxd;
     }
     int minimumDiameterAfterMerge(vector<vector<int>>& edges1, vector<vector<int>>& edges2) {
