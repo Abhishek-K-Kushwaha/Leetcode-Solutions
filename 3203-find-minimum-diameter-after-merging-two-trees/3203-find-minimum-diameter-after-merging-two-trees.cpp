@@ -3,7 +3,7 @@ public:
     int dia = 0;
     int d = 0;
     int dfs(int node, int par, vector<vector<int>>& adj){
-        int maxd = 0, temp;
+        int maxd = d, temp;
         for (int nxt:adj[node]){
             if (nxt != par){
                 d++;
@@ -13,8 +13,8 @@ public:
                 maxd = max(maxd, temp);
             }
         }
-        dia = max(dia, d);
-        return max(maxd, d);
+        //dia = max(dia, d);
+        return maxd;
     }
     int minimumDiameterAfterMerge(vector<vector<int>>& edges1, vector<vector<int>>& edges2) {
         int n = edges1.size(), m = edges2.size();
