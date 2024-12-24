@@ -19,7 +19,6 @@ public:
             i++;
         }
         int n = stoi(temp);
-        //cout<< n << " "<<lvl<<" "<< isright<< endl;
         TreeNode* node = new TreeNode(n);
         if (!isright) par->left = node;
         else par->right = node;
