@@ -3,11 +3,11 @@ public:
     int dia = 0;
     int d = 0;
     int dfs(int node, int par, vector<vector<int>>& adj){
-        int maxd = 0;
+        int maxd = 0, temp;
         for (int nxt:adj[node]){
             if (nxt != par){
                 d++;
-                int temp = dfs(nxt, node, adj);
+                temp = dfs(nxt, node, adj);
                 d--;
                 dia = max(dia, maxd-d + temp-d);
                 maxd = max(maxd, temp);
