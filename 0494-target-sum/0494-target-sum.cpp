@@ -1,22 +1,22 @@
 class Solution {
 public:
+    int f(int ind, int tar, vector<int>& nums, vector<vector<int>>& dp, int offset){
+        if (dp[ind][tar + offset] != -1) return dp[ind][tar + offset];
+        if (ind == 0){
+            int cnt = 0;
+            if (nums[ind] == tar) cnt++;
+            if (nums[ind] == -tar) cnt++;
+            return dp[ind][tar + offset] = cnt;
+        }
+        int pos = f(ind-1, tar - nums[ind], nums, dp, offset);
+        int neg = f(ind-1, tar + nums[ind], nums, dp, offset);
+        return dp[ind][tar + offset] = pos + neg;
+    }
+
     int findTargetSumWays(vector<int>& nums, int target) {
         int n = nums.size();
-        int tot = accumulate(nums.begin(), nums.end(),0);
-        if (target < -tot || target > tot) return 0;
-        vector<int> prev(2*tot+1,0), curr(2*tot+1);
-        prev[tot]=1;
-        for (int i = n-1; i >= 0; i--){
-            for (int t = 0; t < 2*tot+1; t++){
-                curr[t]=0;
-                if (t-tot+nums[i] <= tot) 
-                    curr[t] += prev[t+nums[i]];
-                if (t-tot-nums[i] >= -tot) 
-                    curr[t] += prev[t-nums[i]]; 
-            }
-            prev = curr;
-            //curr.assign(2*tot+1,0);
-        }
-        return prev[target+tot];
+        int offset = 2000;
+        vector<vector<int>> dp(n, vector<int>(4001, -1));
+        return f(n-1, target, nums, dp, offset);
     }
 };
