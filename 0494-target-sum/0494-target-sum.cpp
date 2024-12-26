@@ -13,10 +13,10 @@ public:
         if (d < 0) return 0;
         //vector<vector<int>> dp(n + 1, vector<int>(d + 1, 0));
         vector<int> prev(d+1,0);
+        vector<int> curr(d+1);
         //dp[0][0] = 1;
         prev[0] = 1;
         for (int i = 1; i <= n; i++) {
-            vector<int> curr(d+1);
             for (int t = 0; t <= d; t++) {
                 int notpick = prev[t];
                 int pick = 0;
