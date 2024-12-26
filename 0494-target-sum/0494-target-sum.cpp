@@ -7,9 +7,9 @@ public:
         //int ways;
         for (int i = n-1; i >= 0; i--){
             for (int t = 0; t < 2001; t++){
-                if (t-1000+nums[i] <= 1000 && t-1000+nums[i] >= -1000) 
+                if (t-1000+nums[i] <= 1000) 
                     dp[i][t] += dp[i+1][t+nums[i]];
-                if (t-1000-nums[i] <= 1000 && t-1000-nums[i] >= -1000) 
+                if (t-1000-nums[i] >= -1000) 
                     dp[i][t] += dp[i+1][t-nums[i]]; 
                 //if (dp[i][t])cout << dp[i][t] << " "<< i<<" "<< t-1000<< endl;
             }
