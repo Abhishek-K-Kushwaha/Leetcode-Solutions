@@ -1,22 +1,27 @@
 class Solution {
 public:
-    int f(int ind, int tar, vector<int>& nums, vector<vector<int>>& dp, int offset){
-        if (dp[ind][tar + offset] != -1) return dp[ind][tar + offset];
-        if (ind == 0){
-            int cnt = 0;
-            if (nums[ind] == tar) cnt++;
-            if (nums[ind] == -tar) cnt++;
-            return dp[ind][tar + offset] = cnt;
-        }
-        int pos = f(ind-1, tar - nums[ind], nums, dp, offset);
-        int neg = f(ind-1, tar + nums[ind], nums, dp, offset);
-        return dp[ind][tar + offset] = pos + neg;
-    }
-
     int findTargetSumWays(vector<int>& nums, int target) {
-        int n = nums.size();
-        int offset = 2000;
-        vector<vector<int>> dp(n, vector<int>(4001, -1));
-        return f(n-1, target, nums, dp, offset);
+        int sum = 0;
+        int n = 0;
+        for (int num : nums) {
+            sum += num;
+            n++;
+        }
+        if ((sum - target) % 2 != 0)
+            return 0;
+        int d = (sum - target) / 2;
+        if (d < 0) return 0;
+        vector<vector<int>> dp(n + 1, vector<int>(d + 1, 0));
+        dp[0][0] = 1;
+        for (int i = 1; i <= n; i++) {
+            for (int t = 0; t <= d; t++) {
+                int notpick = dp[i - 1][t];
+                int pick = 0;
+                if (nums[i - 1] <= t)
+                    pick = dp[i - 1][t - nums[i - 1]];
+                dp[i][t] = pick + notpick;
+            }
+        }
+        return dp[n][d];
     }
 };
