@@ -2,9 +2,7 @@ class Solution {
 public:
     int findTargetSumWays(vector<int>& nums, int target) {
         int n = nums.size();
-        //vector<vector<int>> dp(n+1, vector<int> (2001, 0));
         vector<int> prev(2001,0), curr(2001);
-        //dp[n][1000]=1;
         prev[1000]=1;
         for (int i = n-1; i >= 0; i--){
             for (int t = 0; t < 2001; t++){
