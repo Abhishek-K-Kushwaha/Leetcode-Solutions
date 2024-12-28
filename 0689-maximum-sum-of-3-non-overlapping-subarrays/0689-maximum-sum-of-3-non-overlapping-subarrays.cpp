@@ -39,7 +39,8 @@ public:
             l = lmax[i-1];
             r = rmax[i+k];
             if (winsum[l]+winsum[r]+winsum[i] > maxsum){
-                ans = {l,i,r};
+                //ans = {l,i,r};
+                ans[0] = l, ans[1] = i, ans[2] = r;
                 maxsum = winsum[l]+winsum[r]+winsum[i];
             }
         }
