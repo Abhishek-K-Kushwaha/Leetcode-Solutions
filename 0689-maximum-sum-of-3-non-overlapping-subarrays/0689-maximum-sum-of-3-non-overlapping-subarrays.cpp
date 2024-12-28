@@ -9,7 +9,7 @@ public:
         }
         vector<int> lmax(n);
         int maxsum = 0;
-        for (int i = k-1; i <= n-1; i++){
+        for (int i = k-1; i < n; i++){
             if (winsum[i-k+1] > maxsum){
                 lmax[i] = i - k + 1;
                 maxsum = winsum[i-k+1];
