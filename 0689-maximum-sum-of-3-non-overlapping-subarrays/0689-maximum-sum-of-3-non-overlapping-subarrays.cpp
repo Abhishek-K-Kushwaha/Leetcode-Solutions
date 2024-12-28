@@ -9,7 +9,7 @@ public:
         }
         vector<int> lmax(n);
         int maxsum = 0;
-        for (int i = k-1; i <= n-k; i++){
+        for (int i = k-1; i <= n-1; i++){
             if (winsum[i-k+1] > maxsum){
                 lmax[i] = i - k + 1;
                 maxsum = winsum[i-k+1];
@@ -18,12 +18,9 @@ public:
                 lmax[i] = lmax[i-1];
             }
         }
-        // for (auto it: lmax){
-        //     cout << it << endl;
-        // }
         vector<int> rmax(n);
         maxsum = 0;
-        for (int i = n-k; i >= k; i--){
+        for (int i = n-k; i >= 0; i--){
             if (winsum[i] >= maxsum){
                 rmax[i] = i;
                 maxsum = winsum[i];
