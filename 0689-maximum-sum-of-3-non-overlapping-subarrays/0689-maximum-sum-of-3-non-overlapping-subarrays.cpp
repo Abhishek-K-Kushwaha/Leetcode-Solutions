@@ -7,15 +7,15 @@ public:
         for (int i = k; i < n; i++){
             winsum[i-k+1] = winsum[i-k]+nums[i]-nums[i-k];
         }
-        vector<int> lmax(n);
+        vector<int> lmax(n-k+1);
         int maxsum = 0;
         for (int i = k-1; i <= n-k; i++){
             if (winsum[i-k+1] > maxsum){
-                lmax[i] = i - k + 1;
+                lmax[i-k+1] = i - k + 1;
                 maxsum = winsum[i-k+1];
             }
             else{
-                lmax[i] = lmax[i-1];
+                lmax[i-k+1] = lmax[i-k];
             }
         }
         // for (auto it: lmax){
@@ -36,11 +36,10 @@ public:
         vector<int> ans(3);
         maxsum = 0;
         for (int i = k; i <= n-2*k; i++){
-            l = lmax[i-1];
+            l = lmax[i-k];
             r = rmax[i+k];
             if (winsum[l]+winsum[r]+winsum[i] > maxsum){
-                ans = {l,i,r};
-                //ans[0] = l, ans[1] = i, ans[2] = r;
+                ans[0] = l, ans[1] = i, ans[2] = r;
                 maxsum = winsum[l]+winsum[r]+winsum[i];
             }
         }
