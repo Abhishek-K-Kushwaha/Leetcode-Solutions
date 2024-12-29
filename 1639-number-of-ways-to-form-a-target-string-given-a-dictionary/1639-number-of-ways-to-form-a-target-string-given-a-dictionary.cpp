@@ -4,6 +4,7 @@ public:
         int n = words.size();
         int len = words[0].size();
         int tlen = target.size();
+        if (tlen > len) return 0;
         int MOD = 1e9 + 7;
         vector<vector<int>> dp(tlen + 1, vector<int>(len + 1, 0));
         for (int j = 0; j <= len; j++) {
