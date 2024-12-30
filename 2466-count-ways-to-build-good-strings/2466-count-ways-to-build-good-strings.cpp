@@ -1,0 +1,18 @@
+class Solution {
+public:
+    int countGoodStrings(int low, int high, int n0, int n1) {
+        vector<int> dp(high+max(n0,n1)+1, 0);
+        long long ans;
+        int mod = 1e9 + 7;
+        for (int i = high; i >= 0; i--){
+            // if (i >= low) ans = 1;
+            // else ans = 0;
+            ans = (i >= low);
+            ans += dp[i+n0];
+            ans += dp[i+n1];
+            ans %= mod;
+            dp[i] = ans;
+        }
+        return dp[0];
+    }
+};
