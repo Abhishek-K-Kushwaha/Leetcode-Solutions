@@ -22,7 +22,7 @@ public:
             ind++;
         }
         for (int i = 0; i < 26; i++){
-            if (first[i] != -1 && last[i] != first[i]){
+            if (first[i] != -1){
                 ans += f(s, first[i], last[i]);
             }
         }
