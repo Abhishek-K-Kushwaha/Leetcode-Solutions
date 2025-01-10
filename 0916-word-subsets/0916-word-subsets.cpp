@@ -7,14 +7,14 @@ public:
         vector<int> curr(26);
         for (auto& w2 : words2) {
             fill(curr.begin(), curr.end(),0);
-            for (auto c : w2) {
+            for (auto &c : w2) {
                 curr[c - 'a']++;
                 maxfreq[c - 'a'] = max(curr[c - 'a'], maxfreq[c - 'a']);
             }
         }
         for (auto& w1 : words1) {
             vector<int> freq(26, 0);
-            for (auto c : w1) {
+            for (auto &c : w1) {
                 freq[c - 'a']++;
             }
             bool flag = true;
