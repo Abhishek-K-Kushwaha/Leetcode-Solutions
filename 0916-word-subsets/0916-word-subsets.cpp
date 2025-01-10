@@ -3,7 +3,7 @@ public:
     vector<string> wordSubsets(vector<string>& words1, vector<string>& words2) {
         int n1 = words1.size(), n2 = words2.size();
         vector<string> ans;
-        set<string> st(words2.begin(), words2.end());
+        unordered_set<string> st(words2.begin(), words2.end());
         vector<int> maxfreq(26,0);
         for (auto& w2:st){
             vector<int> curr(26,0);
@@ -12,12 +12,6 @@ public:
                 maxfreq[c-'a'] = max(curr[c-'a'], maxfreq[c-'a']);
             }
         }
-        // for (auto& it:freq2){
-        //     for (auto i:it){
-        //         cout << i <<" ";
-        //     }
-        //     cout << endl;
-        // }
         for (auto& w1:words1){
             vector<int> freq(26, 0);
             for (auto c:w1){
