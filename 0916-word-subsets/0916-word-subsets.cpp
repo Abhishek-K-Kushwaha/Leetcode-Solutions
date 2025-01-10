@@ -3,7 +3,6 @@ public:
     vector<string> wordSubsets(vector<string>& words1, vector<string>& words2) {
         int n1 = words1.size(), n2 = words2.size();
         vector<string> ans;
-        //unordered_set<string> st(words2.begin(), words2.end());
         vector<int> maxfreq(26, 0);
         vector<int> curr(26);
         for (auto& w2 : words2) {
