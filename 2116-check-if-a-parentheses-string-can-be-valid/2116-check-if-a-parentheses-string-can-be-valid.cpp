@@ -11,10 +11,8 @@ public:
             }
             else if (s[i] == '('){
                 open.push(i);
-                //cout << 2 << endl;
             }
             else{
-                //cout << 3 << endl;
                 if (!open.empty()){
                     open.pop();
                 }
@@ -24,7 +22,6 @@ public:
                 else return false;
             }
         }
-        //int both = 0;
         while (!both.empty() && !open.empty() && open.top() < both.top()){
             both.pop();
             open.pop();
