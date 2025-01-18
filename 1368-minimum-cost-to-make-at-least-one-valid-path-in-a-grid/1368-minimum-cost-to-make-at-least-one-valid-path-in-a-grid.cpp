@@ -3,36 +3,37 @@ public:
     int minCost(vector<vector<int>>& grid) {
         int m = grid.size();
         int n = grid[0].size();
-        vector<vector<int>> cost(m, vector<int>(n, INT_MAX));
-        deque<pair<int, int>> dq;
-        cost[0][0] = 0;
-        dq.push_front({0, 0});
-        
-        vector<int> dx = {0, 0, 1, -1};
-        vector<int> dy = {1, -1, 0, 0};
-
-        while (!dq.empty()) {
-            auto [i, j] = dq.front();
+        vector<int> dr = {0,0,0,1,-1};
+        vector<int> dc = {0,1,-1,0,0};
+        vector<vector<int>> dis(m, vector<int> (n,1e9));
+        deque<pair<int,int>> dq;
+        dq.push_back({0,0});
+        dis[0][0] = 0;
+        while (!dq.empty()){
+            int r = dq.front().first;
+            int c = dq.front().second;
+            //cout << r << " " << c <<" "<< dis[r][c] << endl;
+            // for (auto & it:dq){
+            //     cout<< it.first << "-"<< it.second<<"  ";
+            // }
+            //cout<< endl;
+            if (r == m-1 && c == n-1) return dis[r][c];
             dq.pop_front();
-            if (i == m-1 && j == n-1) return cost[m-1][n-1];
-            for (int k = 0; k < 4; ++k) {
-                int newi = i + dx[k];
-                int newj = j + dy[k];
-                
-                if (newi >= 0 && newi < m && newj >= 0 && newj < n) {
-                    int newCost = cost[i][j] + (grid[i][j] != k + 1);
-                    
-                    if (newCost < cost[newi][newj]) {
-                        cost[newi][newj] = newCost;
-                        if (grid[i][j] == k + 1) {
-                            dq.push_front({newi, newj});
-                        } else {
-                            dq.push_back({newi, newj});
-                        }
+            for (int i = 1; i < 5; i++){
+                int nr = r + dr[i];
+                int nc = c + dc[i];
+                if (nr >= 0 && nr < m && nc < n && nc >= 0){
+                    if (grid[r][c]==i && dis[nr][nc] > dis[r][c]){ 
+                        dis[nr][nc] = dis[r][c];
+                        dq.push_front({nr, nc});
+                    }
+                    else if (dis[nr][nc] > dis[r][c]+1){ 
+                        dis[nr][nc] = dis[r][c] + 1;
+                        dq.push_back({nr, nc});
                     }
                 }
             }
         }
-        return cost[m - 1][n - 1];
+        return -1;
     }
 };
