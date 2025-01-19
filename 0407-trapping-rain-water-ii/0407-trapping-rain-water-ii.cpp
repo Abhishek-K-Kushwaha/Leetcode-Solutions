@@ -38,7 +38,3 @@ public:
         return ans;
     }
 };
-
-// ind => i*n + j
-// i = ind / n
-// j = ind % n
