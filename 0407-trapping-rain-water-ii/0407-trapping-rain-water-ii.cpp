@@ -6,12 +6,20 @@ public:
         vector<vector<int>> vis(m, vector<int>(n, 0));
         set<pair<int, int>> st;
         for (int i = 0; i < m; i++) {
-            for (int j = 0; j < n; j++) {
-                if (i == 0 || j == 0 || i == m - 1 || j == n - 1) {
-                    vis[i][j] = 1;
-                    st.insert({hmap[i][j], i * n + j});
-                }
-            }
+            vis[i][0] = 1;
+            st.insert({hmap[i][0], i * n });
+        }
+        for (int i = 0; i < m; i++) {
+            vis[i][n-1] = 1;
+            st.insert({hmap[i][n-1], i * n + n-1});
+        }
+        for (int i = 0; i < n; i++) {
+            vis[0][i] = 1;
+            st.insert({hmap[0][i], 0 * n + i});
+        }
+        for (int i = 0; i < n; i++) {
+            vis[m-1][i] = 1;
+            st.insert({hmap[m-1][i], (m-1)* n + i});
         }
         int node, h, r, c, nc, nr, ans = 0;
         vector<int> dr = {1, -1, 0, 0}, dc = {0, 0, 1, -1};
