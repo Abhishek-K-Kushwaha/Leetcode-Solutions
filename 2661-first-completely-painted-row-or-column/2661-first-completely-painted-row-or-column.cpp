@@ -2,14 +2,14 @@ class Solution {
 public:
     int firstCompleteIndex(vector<int>& arr, vector<vector<int>>& mat) {
         // Map to store the index of each number in the arr
-        unordered_map<int, int> numToIndex;
+        int numRows = mat.size();
+        int numCols = mat[0].size();
+        vector<int> numToIndex(numRows*numCols+1);
         for (int i = 0; i < arr.size(); i++) {
             numToIndex[arr[i]] = i;
         }
 
         int result = INT_MAX;
-        int numRows = mat.size();
-        int numCols = mat[0].size();
 
         // Check for the earliest row to be completely painted
         for (int row = 0; row < numRows; row++) {
