@@ -9,7 +9,7 @@ public:
                 ans += (i - stk.top());
                 stk.push(i);
             } else {
-                while (stk.top() >= i) {
+                while (stk.top() > i) {
                     stk.pop();
                 }
                 stk.push(i);
