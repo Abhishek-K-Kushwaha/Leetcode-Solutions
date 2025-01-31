@@ -61,7 +61,7 @@ public:
                 int ans = 1;
                 if (grid[i][j] == 0) {
                     int u = i * n + j;
-                    unordered_set<int> ultimateparent;
+                    set<int> ultimateparent;
                     for (int k = 0; k < 4; k++) {
                         int newi = i + delx[k];
                         int newj = j + dely[k];
